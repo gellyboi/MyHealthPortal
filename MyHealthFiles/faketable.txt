@@ -1,0 +1,103 @@
+INSERT INTO Patients (PatientID, Name, SSN, DOB, PhoneNum, Email, Address)
+VALUES (
+	'1', 'Robert Wilson', '310-09-9346', '1979-12-09', '001-075-302-9387x341', 'amy12@gmail.com', '01893 Dean Station
+Matthewmouth, CO 44797',
+	'2', 'Jeremy Allen', '278-86-0427', '1992-08-08', '+1-362-469-6955', 'fwallace@brewer.com', '993 Castro Burgs
+Phillipsland, AL 08979',
+	'3', 'Brian Conrad', '741-55-4122', '1987-09-06', '(437)813-1191', 'zhernandez@wagner.com', '7010 Jeffrey Manor
+Phillipsfort, MS 95628',
+	'4', 'Mrs. Jennifer Robinson', '824-41-8670', '2009-04-12', '673-395-1739', 'smithmichelle@gmail.com', '47525 Vaughn Turnpike
+Andreaport, NJ 99778',
+	'5', 'Mary Griffin', '066-17-1918', '1911-06-14', '(145)690-6642', 'michael26@cannon.com', '88120 Michael Light Suite 743
+North Andreatown, NH 15467',
+	'6', 'Katherine Cooper MD', '104-35-4028', '1948-08-02', '001-307-221-5682x43419', 'santosmark@hotmail.com', '6018 Deborah Roads Apt. 081
+Harrisonton, WA 94312',
+	'7', 'William Kirk', '066-14-8948', '1924-12-15', '001-716-869-3387x50928', 'samantha45@smith.com', '7871 Stephanie Isle
+Jonesmouth, CO 07951',
+	'8', 'Karen Deleon', '271-05-2880', '2010-01-05', '(101)020-1172', 'davisrandy@hotmail.com', '588 Morgan Ports Apt. 832
+Mariaville, MN 21847',
+	'9', 'Andrew Durham', '120-45-5477', '1923-08-10', '270.988.9624', 'diazmark@sutton.com', '15562 Morton Stream Apt. 539
+Lake Erinmouth, TN 00866',
+	'10', 'Angela Miller', '246-75-9302', '1953-10-17', '046.346.1037x6881', 'lisagriffin@perez-dunn.com', '8334 Nguyen Forks
+Martinchester, MS 05566',
+	'11', 'Curtis Marquez', '518-15-5695', '1981-09-15', '001-940-466-0353x68924', 'nicholasscott@gmail.com', '472 Benitez Prairie Suite 301
+West Lauratown, ME 16003',
+	'12', 'Andrew Wiggins', '561-80-7668', '1965-07-09', '858.902.5566x71435', 'troygonzalez@gmail.com', '742 Jason Knoll Suite 109
+Oliviabury, ID 70506',
+	'13', 'Keith Carpenter', '277-52-0986', '1989-04-14', '897.854.1050x6183', 'uhuffman@johnson.com', '8493 Rodriguez Underpass
+Coxburgh, VT 64324',
+	'14', 'Lauren Frost', '253-42-1162', '1978-06-06', '001-422-341-9405x78148', 'roachashley@clark.com', '523 Timothy Mountains Suite 520
+Jamesfort, IN 79755',
+	'15', 'Jill Campbell', '612-40-7854', '1933-01-17', '001-561-198-2494x83660', 'wsutton@hotmail.com', '56813 Henderson Rapids
+Beardhaven, MD 11482',
+	'16', 'Cynthia Guzman', '231-89-5609', '1911-08-27', '+1-362-507-5832x8163', 'anthony82@gmail.com', '43997 Angela Circle Suite 440
+Roseport, MO 83127',
+	'17', 'Tammy Phillips', '865-28-2873', '1989-10-11', '220-695-7100x9372', 'shansen@smith-greene.net', '3792 Medina Course
+Garciaside, AK 41320',
+	'18', 'Susan Jennings', '153-94-4743', '1908-05-21', '+1-844-115-2351x112', 'jeffreygreene@anderson.org', '945 Thomas Burgs Suite 588
+South Tylerstad, NH 71320',
+	'19', 'Robert Nichols', '794-10-2304', '1927-01-18', '4821684376', 'brent75@hotmail.com', '942 Hunter Stream Suite 865
+South Ashleyborough, MN 52577',
+	'20', 'Daniel Olson', '506-54-3477', '1945-08-05', '001-786-351-9090x36827', 'inichols@garcia-riley.info', '846 Perkins Mews
+Lake Jasonfort, OK 49215',
+	'21', 'Theresa Gallegos', '648-24-3840', '1925-07-12', '521-076-0908x2774', 'ryan08@lynch.info', '34862 Samantha Island
+Bakerfort, ND 73344',
+	'22', 'Patricia Cole MD', '165-71-0993', '1992-04-03', '(820)077-9789', 'karenwood@yahoo.com', '4775 Gerald Stream Apt. 475
+Kennedyhaven, CA 07040',
+	'23', 'David Horton', '082-71-7241', '1913-07-16', '(894)798-6879x6872', 'rogermorgan@yahoo.com', '53276 Marquez Way Suite 227
+Brandibury, NC 97260',
+	'24', 'Anthony Moses', '239-82-2305', '1975-10-09', '4678907433', 'jonesandrew@yahoo.com', '504 Dorothy Court Apt. 582
+South Rebekah, AL 78927',
+	'25', 'Matthew Jones', '419-63-3230', '1954-11-08', '001-712-320-9205', 'jennifer70@yahoo.com', '6496 James Valleys Apt. 658
+New Adamview, MT 30739',
+	'26', 'Paul Parker', '300-77-0543', '2007-07-27', '001-265-794-9817x25517', 'adavis@hale.com', 'Unit 1528 Box 9429
+DPO AE 82912',
+	'27', 'Matthew Jarvis', '561-18-3671', '1999-11-19', '198.176.5166x186', 'shannongomez@yahoo.com', '90078 Hansen Mission Suite 852
+Port Timothy, WA 29344',
+	'28', 'Timothy Cole', '517-81-4680', '1921-01-06', '001-522-507-5732x410', 'newmantimothy@johnson.info', '869 Johnston Circles
+Owensmouth, IL 83741',
+	'29', 'Brandon Branch', '519-47-1919', '1990-04-26', '1292672628', 'michaelrichardson@hotmail.com', '2025 Jenkins Garden
+West Kayla, VT 65789',
+	'30', 'Heather Smith', '340-44-2741', '2010-02-02', '(204)316-2791', 'markcontreras@hotmail.com', '696 Mccormick Mountain Suite 225
+New Davidchester, AZ 56281',
+	'31', 'Jared Riley', '660-34-9169', '1911-02-23', '001-771-399-1123x69282', 'amy53@hotmail.com', '91841 Jackson Springs
+Jennifermouth, WI 34305',
+	'32', 'Andrew Werner', '370-02-3342', '1952-06-18', '851.172.0284x588', 'fvillarreal@hotmail.com', '25337 Antonio Expressway
+Lake Ashleyview, VA 83456',
+	'33', 'Steven Hoffman', '894-30-5805', '1929-11-25', '882-546-4064x85361', 'qtucker@gmail.com', '7801 Linda Village Suite 278
+Bakerborough, MO 58955',
+	'34', 'Pamela Jackson', '585-73-3284', '1914-01-11', '001-854-308-0961', 'johnsonjohn@baker-holland.net', '0140 Ernest Meadow
+Jacksonfort, PA 36392',
+	'35', 'Sandra Krueger', '076-04-6645', '1998-05-12', '(418)887-4335x4275', 'tthomas@hotmail.com', '60176 Zoe Trail Suite 799
+Abbottview, AK 37584',
+	'36', 'Kevin Garza', '887-13-6478', '1970-03-08', '001-115-504-9735x7078', 'javier46@johnson.com', '6139 Ashley Club
+East Aaronport, SD 16096',
+	'37', 'Cynthia Hall', '571-15-8149', '1997-05-30', '304.032.9977x42401', 'pamela19@gmail.com', '970 Michael Burg Suite 955
+New Stephanieview, PA 95465',
+	'38', 'Mary Gould', '005-04-9542', '2006-09-07', '2322495841', 'allen30@gmail.com', 'Unit 7541 Box 2797
+DPO AA 78657',
+	'39', 'Miguel Ayers', '597-84-3236', '1966-01-18', '+1-710-369-7984x427', 'amyarias@shepard-wilson.com', '8336 Elizabeth Green Suite 756
+Katherinestad, MT 28930',
+	'40', 'Breanna Oconnor', '765-50-1417', '1973-02-25', '+1-733-391-1302x632', 'amercado@gmail.com', '46937 Barrett Parks Apt. 127
+Port Casey, MO 44038',
+	'41', 'Laura Dawson DDS', '502-50-4215', '1927-10-29', '481.296.2879x84780', 'catherine76@yahoo.com', '813 Burke Lodge
+Lake Michael, MD 17016',
+	'42', 'Kelly Hall', '859-56-3213', '1914-01-19', '448-257-2048x640', 'boyerdeanna@hotmail.com', '7109 Lewis Hills
+North Thomasville, AL 01551',
+	'43', 'Hannah Wilson', '344-03-1185', '1913-06-17', '+1-223-102-7402x0595', 'john95@hotmail.com', '26761 Mandy Roads Apt. 630
+Austinburgh, NH 52135',
+	'44', 'Brett Murray', '761-21-6245', '1958-03-15', '278-574-0340x311', 'anthonytrujillo@walker.com', '0699 Joshua Islands
+West Nicolechester, OR 23364',
+	'45', 'Joan Carter', '498-64-0536', '2008-01-26', '001-694-952-9359', 'uhester@ruiz.com', '580 Gregory Ramp
+North Williamside, MI 62599',
+	'46', 'Briana Thompson', '819-89-0902', '1971-05-30', '305-042-0866x8591', 'alexandergallegos@fields.info', '847 Nicholas Burgs Suite 954
+Mckinneyshire, DC 65544',
+	'47', 'Jamie Simon', '870-30-2040', '1914-01-11', '(400)120-4571x72081', 'victorlee@hotmail.com', 'PSC 0487, Box 6379
+APO AP 76586',
+	'48', 'Craig Orr', '730-47-9782', '1960-05-19', '+1-193-414-2006x19283', 'carolinescott@cantrell-rodriguez.com', '3521 Adams Villages
+Arthurfort, VA 34433',
+	'49', 'Mr. Joshua Brown MD', '498-29-4572', '1914-11-11', '001-434-823-8885x80337', 'amaynard@yahoo.com', '8340 Rose Mission
+Amandamouth, HI 95024',
+	'50', Ebony Mann', '243-57-6252', '1952-05-17', '+1-974-258-8514', 'egriffith@yahoo.com', '90380 James Station
+Port Gwendolynport, SC 87439'
+);

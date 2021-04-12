@@ -1,0 +1,56 @@
+
+//storage of patient user data for login and basic profile desc.
+CREATE TABLE `Patients`(
+
+);
+
+//table of notes listed by doctor at an appointment
+CREATE TABLE `PatientNotes`(
+
+);
+
+//holds record of patient data (appointments, diagnoses, statuses)
+CREATE TABLE `PatientRecords`(
+
+);
+
+//holds record of costs to patients and insurance providers
+CREATE TABLE `Costs`(
+
+);
+
+//table of doctors that are available for the patient to make appointment with
+CREATE TABLE `Doctors`(
+
+);
+
+//appointments made by the patient(s)
+CREATE TABLE `Appointments`(
+
+);
+
+//table of insurance plans that are available for the patient
+CREATE TABLE `InsPlans`(
+
+);
+
+//table of insurance providers that the patient can view
+CREATE TABLE `InsProviders`(
+
+);
+
+//table of prescriptions that are okayed for patients
+CREATE TABLE `Pharmaceuticals`(
+
+);
+
+//table of pharmacies that patients can get prescriptions from
+CREATE TABLE `Pharmacies`(
+
+);
+
+//table of when patients have gotten their medication
+CREATE TABLE `PharmacyRecords`(
+
+);
+
