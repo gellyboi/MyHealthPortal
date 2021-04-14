@@ -1,4 +1,7 @@
-<?php include 'server.php'; ?>
+<?php 
+	include 'server.php'; 
+	//echo getcwd();
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -6,14 +9,14 @@
 	</head>
 	<body>
 		<form method="post" action="register.php">
-			<?php include('errors.php'); ?>
+			<?php include('errorHandle.php'); ?>
 			<div class="input-group">
 				<label>First Name</label>
-				<input type="text" name="firstname" value="<?php echo $firstname; ?>">
+				<input type="text" name="firstName" value="<?php echo $firstname; ?>">
 			</div>
 			<div class="input-group">
 				<label>Last Name</label>
-				<input type="text" name="lastname" value="<?php echo $lastname; ?>">
+				<input type="text" name="lastName" value="<?php echo $lastname; ?>">
 			</div>
 			<div class="input-group">
 				<label>Social Security Number</label>

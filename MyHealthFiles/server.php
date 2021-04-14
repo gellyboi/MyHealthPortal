@@ -1,8 +1,8 @@
 <?php
 	//Start the session
 	session_start();
-	//error_reporting(0);
-	include 'includes/dbconn.php';
+	error_reporting(0);
+	include 'anotherconn.php';
 
 	//========== Global Parameters ==========
 
@@ -32,7 +32,10 @@
 	
 
 	//========== Database Connection ==========
-	$socket = "/vols/sdb7/httpdh3_db/httpdh3_db.sock";
+	//$socket = "/vols/sdb7/httpdh3_db/httpdh3_db.sock";
+	//$servername = "localhost";
+	//$username = "httpdh3";
+	//$sqlport = "3309";
 	$conn = new mysqli($servername, $username, "", "db1", $sqlport, $socket);
 
 	// Check connection
