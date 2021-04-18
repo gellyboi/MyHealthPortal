@@ -8,6 +8,7 @@ i = 0
 email_domain_list = ['@gmail.com', '@yahoo.com', '@hotmail.com', '@aol.com']
 
 users = []
+emails = []
 
 print("INSERT INTO `Patients` (`PatientID`, `FirstName`, `LastName`, `SSN`, `DOB`, `PhoneNum`, `Email`, `Address`)")
 print("VALUES ")
@@ -19,6 +20,7 @@ while i < 50:
     dob = fake.date_of_birth()
     phoneNum = fake.phone_number()
     email = lastname.lower() + str(i % 10000) + fake.word(ext_word_list=email_domain_list)
+    emails.append(email)
     address = fake.address()
     users.append(lastname.lower() + str(random.randint(11,99)))
     if i == 50:
@@ -32,17 +34,17 @@ password_characters = string.ascii_letters + string.digits
 
 
 i = 0
-print("INSERT INTO `Users` (`PID`, `Username`, `Userpass`)")
+print("INSERT INTO `Users` (`PID`, `Email`, `Password`)")
 print("VALUES ")
 while i < 50:
-    username = users[i]
+    email = emails[i]
     password = ''.join(random.choice(password_characters) for i in range(12))
     i += 1
     
     if i == 50:
-        print("\t(" + str(i) + ", '" + username + "', '" + password + "');")
+        print("\t(" + str(i) + ", '" + email + "', '" + password + "');")
     else:
-        print("\t(" + str(i) + ", '" + username + "', '" + password + "'),")
+        print("\t(" + str(i) + ", '" + email + "', '" + password + "'),")
 print("\n")
 
 # THIS IS THE INSERTION FOR DOCTORS

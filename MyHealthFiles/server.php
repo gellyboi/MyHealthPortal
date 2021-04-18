@@ -58,12 +58,12 @@
 	//check login credentials
 	//if match found, success! promote status to access homepage (index.php)
 	if(isset($_POST['login'])){		//$_post index depends on name of form in login.php
-		$username = mysqli_real_escape_string($conn, $_POST['email']);
+		$email = mysqli_real_escape_string($conn, $_POST['email']);
 		$password = mysqli_real_escape_string($conn, $_POST['password']);
 		
 		//are there empty fields?
-		if(empty($username)){
-			array_push($errorList, "Empty usernames are not allowed.");
+		if(empty($email)){
+			array_push($errorList, "Empty emails are not allowed.");
 		}
 		if(empty($password)){
 			array_push($errorList, "Empty passwords are not allowed.");
@@ -71,7 +71,7 @@
 		//No errors? proceed.
 		if(count($errorList) == 0){
 			//Query patient DB for login credentials
-			$pQuery = "SELECT * FROM Users WHERE Username='$username' AND Userpass='$password';";
+			$pQuery = "SELECT * FROM Users WHERE Email='$username' AND Password='$password';";
 			$result = mysqli_query($conn, $pQuery);
 			$user = mysqli_fetch_assoc($result);
 			
