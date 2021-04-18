@@ -1,4 +1,4 @@
-<?php include('server.php') ?>
+<?php include 'server.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,11 +8,13 @@
 
 <h1>My Health Portal Login</h1>
 <form method="post" action="login.php">
+<?php include 'errorHandle.php'; ?>
 <label>Email</label>
 <input type="text" name="email">
 <label>Password</label>
 <input type="text" name="password">
 <button type="submit" name="login">Login</button>
+</form>
 <p>
     Not a member? <a href="register.php">Sign up</a>
 </p>

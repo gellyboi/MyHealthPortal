@@ -36,7 +36,7 @@
 	//$servername = "localhost";
 	//$username = "httpdh3";
 	//$sqlport = "3309";
-	$conn = new mysqli($servername, $username, "", "db1", $sqlport, $socket);
+	$conn = new mysqli($servername, $username, "", "db2", $sqlport, $socket);
 
 	// Check connection
 	if ($conn->connect_error) {
@@ -57,8 +57,8 @@
 	//=========== Login User ===============
 	//check login credentials
 	//if match found, success! promote status to access homepage (index.php)
-	if(isset($_POST['login_user'])){		//$_post index depends on name of form in login.php
-		$username = mysqli_real_escape_string($conn, $_POST['username']);
+	if(isset($_POST['login'])){		//$_post index depends on name of form in login.php
+		$username = mysqli_real_escape_string($conn, $_POST['email']);
 		$password = mysqli_real_escape_string($conn, $_POST['password']);
 		
 		//are there empty fields?
@@ -72,11 +72,11 @@
 		if(count($errorList) == 0){
 			//Query patient DB for login credentials
 			$pQuery = "SELECT * FROM Users WHERE Username='$username' AND Userpass='$password';";
-			$result = mysqli_query($conn, $query);
-			$user = mysqli_fetch_assoc($results);
+			$result = mysqli_query($conn, $pQuery);
+			$user = mysqli_fetch_assoc($result);
 			
 			//are credentials unique?
-			if(mysqli_num_rows($results) == 1){
+			if(mysqli_num_rows($result) == 1){
 				//set session specific attributes.
 				$_SESSION['name'] = $username;
 				$_SESSION['pid'] = $user['PID'];
