@@ -131,15 +131,16 @@ CREATE TABLE IF NOT EXISTS `PharmacyRecords`(
 	PharmacyID int,
 	PrescriptionName varchar(32),
 	PurchaseDate varchar(10),
+	Cost float(9,2),
 	FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
 	FOREIGN KEY (PharmacyID) REFERENCES Pharmacies(PharmacyID)
 );
 
 --table of user login data for patients
---DESCRIBES username, password, REFERENCES PatientID
+--DESCRIBES email, password, REFERENCES PatientID
 CREATE TABLE IF NOT EXISTS `Users`(
 	PID int,
-	Username varchar(20),
-	Userpass varchar(20),
+	Email varchar(48),
+	Password varchar(20),
 	FOREIGN KEY (PID) REFERENCES Patients(PatientID)
 );

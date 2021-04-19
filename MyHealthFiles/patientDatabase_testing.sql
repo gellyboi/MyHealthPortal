@@ -22,6 +22,17 @@ CREATE TABLE IF NOT EXISTS `Doctors`(
 	PRIMARY KEY (DocID)
 );
 
+CREATE TABLE IF NOT EXISTS `Appointments`(
+	AppointmentID int,
+	PatientID int,
+	DocID int,
+	AppDate varchar(10),
+	AppTime varchar(8),
+	Reason varchar(127),
+	FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+	FOREIGN KEY (DocID) REFERENCES Doctors(DocID)
+);
+
 CREATE TABLE IF NOT EXISTS `InsPlans`(
 	PlanID int,
 	AnnualDeductible float(9,2),

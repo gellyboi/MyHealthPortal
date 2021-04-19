@@ -6,7 +6,7 @@
 
 #side-panel {
 	width: 12%;
-	height: 80%;
+	height: 800px;
 	float: left;
 	padding: 15px;
 	margin: 0px 0px 0px 0px;
@@ -31,6 +31,15 @@
 	background-color: #f0fefe;
 }
 
+#footer-panel {
+	float: bottom;
+	margin: 0px;
+	padding-top: 15px;
+	clear: both;
+	border-top: 1px solid black;
+	text-align: center;
+	
+}
 
 .center-text {
 	text-align: center;

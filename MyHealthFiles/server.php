@@ -90,17 +90,20 @@
 		if($password1 != $password2){
 			array_push($errorList, "Passwords do not match.");
 		} else {
-			//make call to insert new user
-			//first, get number of patient rows. new ID will be one plus this
-			$pQuery = "SELECT * FROM Patients WHERE 1";
-			$result = mysqli_query($conn, $pQuery);
-			$newID = mysqli_num_rows($result) + 1;
-			//insert credentials
-			$registerQuery = "INSERT INTO `Patients` (`PatientID`, `FirstName`, `LastName`, `SSN`, `DOB`, `PhoneNum`, `Email`, `Address`) VALUES ($newID, '$firstname', '$lastname', '$ssn', '$dob', '$phone', '$email', '$address'); 
-			INSERT INTO `Users` (`PID`, `Email`, `Password`) VALUES ($newID, '$email', '$password1');";
-			mysqli_multi_query($conn, $registerQuery);
-			//redirect to log in new data
-			header('location: login.php');
+			if(count($errorList) == 0){
+				//make call to insert new user
+				//first, get number of patient rows. new ID will be one plus this
+				//shouldn't particularly matter how long this takes. as long as it gets done for just registering.
+				$pQuery = "SELECT * FROM Patients WHERE 1";
+				$result = mysqli_query($conn, $pQuery);
+				$newID = mysqli_num_rows($result) + 1;
+				//insert credentials
+				$registerQuery = "INSERT INTO `Patients` (`PatientID`, `FirstName`, `LastName`, `SSN`, `DOB`, `PhoneNum`, `Email`, `Address`) VALUES ($newID, '$firstname', '$lastname', '$ssn', '$dob', '$phone', '$email', '$address'); 
+				INSERT INTO `Users` (`PID`, `Email`, `Password`) VALUES ($newID, '$email', '$password1');";
+				mysqli_multi_query($conn, $registerQuery);
+				//redirect to log in new data
+				header('location: login.php');
+			}
 		}
 	}
 	
