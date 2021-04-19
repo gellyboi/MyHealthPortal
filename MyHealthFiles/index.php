@@ -22,25 +22,28 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>My Health Portal</h1>
-    <h1>Welcome, <?php echo $_SESSION['name']; ?></h1>
+	<div id="header-panel">
+		<h1 class="center-text">My Health Portal</h1>
+		
+	</div>
 	
 	<!-- PUT BELOW IN A DIV FOR A SIDE PANEL -->
-	<div class="side-panel">
-		<p><a href="index.php">View and Create Appointments</a></p>
-		<p><a href="index.php">Request a Test</a></p>
-		<p><a href="index.php">Review Your Insurance Plans</a></p>
-		<p><a href="index.php">See Your Billing Statements</a></p>
+	<div id="side-panel">
+		<h2 class="top-text">Welcome, <?php echo $_SESSION['name']; ?>!</h2>
+		<p class="itemize"><a href="index.php">View and Create Appointments</a></p>
+		<p class="itemize"><a href="index.php">Request a Test</a></p>
+		<p class="itemize"><a href="index.php">Review Your Insurance Plans</a></p>
+		<p class="itemize"><a href="index.php">See Your Billing Statements</a></p>
 		
 		<form method="post" action="index.php">
 			<button type="submit" name="logout">Sign Out</button>
 		</form>
 	</div>
 	
-	<div class="center-panel">
+	<div id="center-panel">
 		<!-- MAIN BODY DIV WILL LIST CONVENIENT INFORMATION; PATIENT PROFILE MAYBE?... -->
 		<!-- BASICALLY JUST ANOTHER TABLE RETURNED BY PRECANNED QUERY -->
-		<h2>My Health Profile Overview</h2>
+		<h2 class="top-text">My Health Profile Overview</h2>
 		
 	</div>
 		
