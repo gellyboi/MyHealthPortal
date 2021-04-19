@@ -132,8 +132,11 @@
 			if(mysqli_num_rows($result) == 1){
 				//set session specific attributes.
 				//get name of patient from "SELECT FirstName FROM Patients WHERE PatientID = $user['PID'];"
-				$_SESSION['name'] = $email;
 				$_SESSION['pid'] = $user['PID'];
+				$pQuery = "SELECT * FROM Patients WHERE PatientID = $user[PID]";
+				$result = mysqli_query($conn, $pQuery);
+				$user = mysqli_fetch_assoc($result);
+				$_SESSION['name'] = $user['FirstName'];
 				$_SESSION['successMsg'] = "You are now logged in.";
 				header('location: index.php');
 			} else {
