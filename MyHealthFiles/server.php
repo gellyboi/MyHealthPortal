@@ -96,10 +96,9 @@
 			$result = mysqli_query($conn, $pQuery);
 			$newID = mysqli_num_rows($result) + 1;
 			//insert credentials
-			$registerQuery = "INSERT INTO `Patients` (`PatientID`, `FirstName`, `LastName`, `SSN`, `DOB`, `PhoneNum`, `Email`, `Address`) VALUES ($newID, '$firstname', '$lastname', '$ssn', '$dob', '$phone', '$email', '$address');";
-			mysqli_query($conn, $registerQuery);
-			$registerQuery = "INSERT INTO `Users` (`PID`, `Email`, `Password`) VALUES ($newID, '$email', '$password');";
-			mysqli_query($conn, $registerQuery);
+			$registerQuery = "INSERT INTO `Patients` (`PatientID`, `FirstName`, `LastName`, `SSN`, `DOB`, `PhoneNum`, `Email`, `Address`) VALUES ($newID, '$firstname', '$lastname', '$ssn', '$dob', '$phone', '$email', '$address'); 
+			INSERT INTO `Users` (`PID`, `Email`, `Password`) VALUES ($newID, '$email', '$password1');";
+			mysqli_multi_query($conn, $registerQuery);
 			//redirect to log in new data
 			header('location: login.php');
 		}
@@ -132,6 +131,7 @@
 			//are credentials unique?
 			if(mysqli_num_rows($result) == 1){
 				//set session specific attributes.
+				//get name of patient from "SELECT FirstName FROM Patients WHERE PatientID = $user['PID'];"
 				$_SESSION['name'] = $email;
 				$_SESSION['pid'] = $user['PID'];
 				$_SESSION['successMsg'] = "You are now logged in.";

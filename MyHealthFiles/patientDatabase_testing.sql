@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `InsProviders`(
 
 CREATE TABLE IF NOT EXISTS `Users`(
 	PID int,
-	Email varchar(20),
+	Email varchar(48),
 	Password varchar(20),
 	FOREIGN KEY (PID) REFERENCES Patients(PatientID)
 );
