@@ -32,7 +32,6 @@
 		<h2 class="top-text">Welcome, <?php echo $_SESSION['name']; ?>!</h2>
 		<p class="itemize"><a href="index.php">Home</a></p>
 		<p class="itemize"><a href="appointments.php">Create Appointments</a></p>
-		<p class="itemize"><a href="index.php">Request a Test</a></p>
 		<p class="itemize"><a href="index.php">Purchase Pharmaceuticals</a></p>
 		<p class="itemize"><a href="index.php">Review Your Insurance Plans</a></p>
 		<p class="itemize"><a href="index.php">See Your Billing Statements</a></p>
@@ -69,7 +68,8 @@
 		<?php endif; ?>
 		<?php if (mysqli_num_rows($result) > 0) : ?>
 			<p>You have appointments!</p>
-			<!-- NOW LIST THEM -->
+			<!-- NOW LIST THEM (QUERY SHOULD JOIN WITH DOCTOR TABLE, SO WE CAN GET A NAME) -->
+			
 		<?php endif; ?>
 		
 	</div>

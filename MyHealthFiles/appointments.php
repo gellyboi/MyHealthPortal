@@ -16,7 +16,6 @@
 			<h2 class="top-text">Welcome, <?php echo $_SESSION['name']; ?>!</h2>
 			<p class="itemize"><a href="index.php">Home</a></p>
 			<p class="itemize"><a href="appointments.php">Create Appointments</a></p>
-			<p class="itemize"><a href="index.php">Request a Test</a></p>
 			<p class="itemize"><a href="index.php">Purchase Pharmaceuticals</a></p>
 			<p class="itemize"><a href="index.php">Review Your Insurance Plans</a></p>
 			<p class="itemize"><a href="index.php">See Your Billing Statements</a></p>
@@ -32,7 +31,7 @@
 			<!-- FOR APPOINTMENTS WE WANT TO BE ABLE TO CHOOSE DOCTORS TO MAKE APPOINTMENTS WITH, SO LIST THE DOCTORS -->
 			<h2 class="top-text">Choose a doctor to make an appointment with, and fill in other necessary information:</h2>
 			<?php
-				$dQuery = "SELECT * FROM Doctors WHERE 1;";
+				$dQuery = "SELECT * FROM Doctors ORDER BY LastName;";
 				$result = mysqli_query($conn, $dQuery);
 				$i = 1;
 			?>
