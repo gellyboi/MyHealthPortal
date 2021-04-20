@@ -69,6 +69,13 @@
 		<?php if (mysqli_num_rows($result) > 0) : ?>
 			<p>You have appointments!</p>
 			<!-- NOW LIST THEM (QUERY SHOULD JOIN WITH DOCTOR TABLE, SO WE CAN GET A NAME) -->
+			<?php 
+				$aQuery = "SELECT AppDate, AppTime, Reason, FirstName, LastName, Email FROM Appointments INNER JOIN Doctors ON Doctors.DocID = Appointments.DocID WHERE PatientID=$_SESSION[pid];";
+				$result = mysqli_query($conn, $aQuery);
+				while($row = mysqli_fetch_assoc($result)){
+			?>
+			<p><?php echo $row['AppDate']." ".$row['AppTime'].", Dr. ".$row['FirstName']." ".$row['LastName'].", (".$row['Email'].")"; ?></p>
+			<?php }; ?>
 			
 		<?php endif; ?>
 		
