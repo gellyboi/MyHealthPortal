@@ -30,48 +30,44 @@
 			<!-- MAIN BODY DIV WILL LIST CONVENIENT INFORMATION; PATIENT PROFILE MAYBE?... -->
 			<!-- BASICALLY JUST ANOTHER TABLE RETURNED BY PRECANNED QUERY -->
 			<!-- FOR APPOINTMENTS WE WANT TO BE ABLE TO CHOOSE DOCTORS TO MAKE APPOINTMENTS WITH, SO LIST THE DOCTORS -->
-			<h2 class="top-text">Choose a doctor to make an appointment with:</h2>
+			<h2 class="top-text">Choose a doctor to make an appointment with, and fill in other necessary information:</h2>
 			<?php
 				$dQuery = "SELECT * FROM Doctors WHERE 1;";
 				$result = mysqli_query($conn, $dQuery);
 				$i = 1;
 			?>
-			<form class="indent" method="post" action="appointments.php">
-				<?php while($row = mysqli_fetch_assoc($result)){  ?>
-					<input type="radio" id="docSelect" name="docs" value="<?php echo 100000000 + i; ?>">
-					<label for="docSelect">Dr. <?php echo $row['FirstName']." ".$row['LastName'].",&nbsp;&nbsp;&nbsp;&nbsp;(".$row['Email'].")"; ?></label><br>
-				<?php $i++;}; ?>
-				<br>
-				<button type="submit" name="docChoice">Submit Choice</button>
-			</form> 
 			<!-- THEN IMPLEMENT REGISTRATION TO BE ABLE TO FILL OUT NECESSARY COLUMNS: APPDATE, APPTIME, WITH REASON -->
-			<?php if(isset($_POST['docChoice'])): ?>
-				<form method="post" action="appointments.php">
-					<div class="input-group">
-						<label>Appointment Date:</label>
-						<input type="date" name="appDate">
-					</div>
-					<div class="input-group">
-						<label>Appointment Time:</label>
-						<input type="time" name="appTime">
-					</div>
-					<div class="input-group">
-						<label>Reason:</label>
-						<input type="text" name="reason">
-					</div>
-					<div class="input-group">
-						<button type="submit" name="makeAppointment">Create Appointment</button>
-					</div>
-				</form>
-			<?php endif; ?>
+			<form method="post" action="appointments.php">
+				<label for="docs">Choose a Doctor:</label>
+				<select name="docs">
+					<?php while($row = mysqli_fetch_assoc($result)){  ?>
+						<option value=<?php echo 100000000 + $i; ?>>Dr. <?php echo $row['FirstName']." ".$row['LastName'].",&nbsp;&nbsp;&nbsp;&nbsp;(".$row['Email'].")"; ?></option>
+					<?php $i++;}; ?>
+				</select><br>
+				<div class="input-group">
+					<label>Appointment Date:</label>
+					<input type="date" name="appDate">
+				</div>
+				<div class="input-group">
+					<label>Appointment Time:</label>
+					<input type="time" name="appTime">
+				</div>
+				<div class="input-group">
+					<label>Reason:</label>
+					<input type="text" name="reason">
+				</div>
+				<div class="input-group">
+					<button type="submit" name="makeAppointment">Create Appointment</button>
+				</div>
+			</form>
 			<?php 
 			if(isset($_POST['makeAppointment'])){
 				$aQuery = "SELECT AppointmentID FROM Appointments WHERE 1;";
 				$result = mysqli_query($conn, $aQuery);
 				$appointmentID = 1 + mysqli_num_rows($result);
-				$addAppointment = "INSERT INTO `Appointments` (`AppointmentID`, `PatientID`, `DocID`, `AppDate`, `AppTime`, `Reason`) VALUES ($appointmentID, $_SESSION[pid], $_POST[docChoice], '$_POST[appDate]', '$_POST[appTime]', '$_POST[reason]');";
+				$addAppointment = "INSERT INTO `Appointments` (`AppointmentID`, `PatientID`, `DocID`, `AppDate`, `AppTime`, `Reason`) VALUES ($appointmentID, $_SESSION[pid], $_POST[docs], '$_POST[appDate]', '$_POST[appTime]', '$_POST[reason]');";
 				$result = mysqli_query($conn, $addAppointment);
-				echo "$_POST[docChoice]";
+				echo "$_POST[docs]";
 			}
 			?>
 		</div>
