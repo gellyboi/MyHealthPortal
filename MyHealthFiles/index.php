@@ -31,8 +31,9 @@
 	<div id="side-panel">
 		<h2 class="top-text">Welcome, <?php echo $_SESSION['name']; ?>!</h2>
 		<p class="itemize"><a href="index.php">Home</a></p>
-		<p class="itemize"><a href="index.php">Create Appointments</a></p>
+		<p class="itemize"><a href="appointments.php">Create Appointments</a></p>
 		<p class="itemize"><a href="index.php">Request a Test</a></p>
+		<p class="itemize"><a href="index.php">Purchase Pharmaceuticals</a></p>
 		<p class="itemize"><a href="index.php">Review Your Insurance Plans</a></p>
 		<p class="itemize"><a href="index.php">See Your Billing Statements</a></p>
 		
@@ -49,7 +50,7 @@
 			$result = mysqli_query($conn, $profileQuery);
 			$profile = mysqli_fetch_assoc($result);
 		?>
-		<h2 class="top-text">My Health Profile Overview</h2>
+		<h2 class="top-text">My Health Profile Overview:</h2>
 		<p>Name: <?php echo "$profile[FirstName] $profile[LastName]";?></p>
 		<p>Date of Birth: <?php echo $profile['DOB']; ?></p>
 		<p>Email: <?php echo $profile['Email']; ?></p>
@@ -65,11 +66,11 @@
 		?>
 		<?php if (mysqli_num_rows($result) == 0) : ?>
 			<p>No appointments scheduled.</p>
-		<?php endif ?>
+		<?php endif; ?>
 		<?php if (mysqli_num_rows($result) > 0) : ?>
 			<p>You have appointments!</p>
 			<!-- NOW LIST THEM -->
-		<?php endif ?>
+		<?php endif; ?>
 		
 	</div>
 	

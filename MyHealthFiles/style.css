@@ -41,6 +41,11 @@
 	
 }
 
+#login-panel {
+	padding: 15px;
+	text-align: center;
+}
+
 .center-text {
 	text-align: center;
 }
@@ -52,4 +57,12 @@ h2.top-text {
 
 .itemize {
 	padding-bottom: 10px;
+}
+
+.input-group {
+	padding: 5px;
+}
+
+.indent {
+	padding-left:25px;
 }
