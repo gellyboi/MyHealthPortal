@@ -52,15 +52,11 @@
 				</div>
 			</form>
 			<?php 
-			/*
 			if(isset($_POST['registerPlan'])){
-				$aQuery = "SELECT AppointmentID FROM Appointments WHERE 1;";
-				$result = mysqli_query($conn, $aQuery);
-				$appointmentID = 1 + mysqli_num_rows($result);
-				$addAppointment = "INSERT INTO `Appointments` (`AppointmentID`, `PatientID`, `DocID`, `AppDate`, `AppTime`, `Reason`) VALUES ($appointmentID, $_SESSION[pid], $_POST[docs], '$_POST[appDate]', '$_POST[appTime]', '$_POST[reason]');";
-				$result = mysqli_query($conn, $addAppointment);
+				$addPlan = "INSERT INTO `RegisteredPlans` (`PlanID`, `PatientID`) VALUES ($_POST[insChoice], $_SESSION[pid]);";
+				$result = mysqli_query($conn, $addPlan);
 			}
-			*/
+			
 			?>
 		</div>
 		
