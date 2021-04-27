@@ -61,6 +61,13 @@ CREATE TABLE IF NOT EXISTS `Users`(
 	FOREIGN KEY (PID) REFERENCES Patients(PatientID)
 );
 
+CREATE TABLE IF NOT EXISTS `RegisteredPlans`(
+	PlanID int,
+	PatientID int,
+	FOREIGN KEY (PlanID) REFERENCES InsPlans(PlanID),
+	FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
+);
+
 
 INSERT INTO `Patients` (`PatientID`, `FirstName`, `LastName`, `SSN`, `DOB`, `PhoneNum`, `Email`, `Address`)
 VALUES 

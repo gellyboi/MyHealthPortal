@@ -33,7 +33,7 @@
 		<p class="itemize"><a href="index.php">Home</a></p>
 		<p class="itemize"><a href="appointments.php">Create Appointments</a></p>
 		<p class="itemize"><a href="index.php">Purchase Pharmaceuticals</a></p>
-		<p class="itemize"><a href="index.php">Review Your Insurance Plans</a></p>
+		<p class="itemize"><a href="insurancePlans.php">Review Your Insurance Plans</a></p>
 		<p class="itemize"><a href="index.php">See Your Billing Statements</a></p>
 		
 		<form method="post" action="index.php">
