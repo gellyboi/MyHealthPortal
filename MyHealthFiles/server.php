@@ -5,20 +5,6 @@
 	include 'anotherconn.php';
 
 	//========== Global Parameters ==========
-
-	/*$msgIndex = 0;
-
-	$targetDB = '';
-	$querytype = 'sql';
-	$inputQuery = '';
-
-	$tableName = '';
-	$selection = '';
-
-	$search_result = null;
-	$errorMsg = array('');
-	$successMsg = array('');
-	$defaultTables = ['information_schema'];*/
 	
 	//Initialize relevant user data
 	$firstname = "";
@@ -32,10 +18,6 @@
 	
 
 	//========== Database Connection ==========
-	//$socket = "/vols/sdb7/httpdh3_db/httpdh3_db.sock";
-	//$servername = "localhost";
-	//$username = "httpdh3";
-	//$sqlport = "3309";
 	$conn = new mysqli($servername, $username, "", "db2", $sqlport, $socket);
 
 	// Check connection
