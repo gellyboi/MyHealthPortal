@@ -38,6 +38,10 @@
 	
 	<!-- BODY PANEL -->
 	<div id="center-panel">
+		<!-- For the Billings page, a good choice would be to break up listing costs in sections (i.e. Insurance costs, Prescription Costs and appointment costs) -->
+		<!-- All of these costs should be found in the Costs table, should differentiate using TypeOfCost, (TypeOfCost as varchar or int?) -->
+		<!-- Make a report for costs, maybe available as a pdf? -->
+		
 		<h2 class="top-text">Body Header</h2>
 		<p>stuff goes here</p>
 	</div>

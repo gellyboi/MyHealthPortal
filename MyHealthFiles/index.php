@@ -79,6 +79,9 @@
 			
 		<?php endif; ?>
 		
+		<!-- ADD ANOTHER SECTION TO LIST PATIENT RECORDS (RETRIEVE FROM PatientRecords) -->
+		<!-- PatientRecords should have fields added to it once a doctor submits their notes from an appointment or approves a prescription -->
+		
 	</div>
 	
 	<!-- ADD A FOOTER HERE MAYBE -->
