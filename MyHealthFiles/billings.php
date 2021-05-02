@@ -1,13 +1,7 @@
 <?php
     include('server.php');
+	include('errorHandle.php');
 ?>
-<?php
-    if (!isset($_SESSION['name'])) {
-        $_SESSION['msg'] = "Login required";
-        header('location: login.php');
-    }
-?>
-
 
 <!DOCTYPE html>
 <html>

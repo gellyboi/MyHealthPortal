@@ -1,5 +1,6 @@
 <?php
     include('server.php');
+	include('errorHandle.php');
 ?>
 <?php
     //session_start();
@@ -29,6 +30,8 @@
 	
 	<!-- PUT BELOW IN A DIV FOR A SIDE PANEL -->
 	<div id="side-panel">
+		<!-- Wouldn't be a bad idea to have if statements for when either a doctor or patient logs in. -->
+		<!-- That way, we can add to the index page so that it's the index for patients AND doctors -->
 		<h2 class="top-text">Welcome, <?php echo $_SESSION['name']; ?>!</h2>
 		<p class="itemize"><a href="index.php">Home</a></p>
 		<p class="itemize"><a href="appointments.php">Create Appointments</a></p>
