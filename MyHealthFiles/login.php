@@ -7,7 +7,7 @@
 </head>
 <body>
 <div id="header-panel">
-	<h1>My Health Portal Login</h1>
+	<h1 class="center-text">My Health Portal Login</h1>
 </div>
 <div id="login-panel">
 	<form method="post" action="login.php">

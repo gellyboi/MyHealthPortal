@@ -4,7 +4,7 @@
 ?>
 <?php
     //session_start();
-    if (!isset($_SESSION['name'])) {
+    if (!isset($_SESSION['pid']) || !isset($_SESSION['did'])){
         $_SESSION['msg'] = "Login required";
         header('location: login.php');
     }
