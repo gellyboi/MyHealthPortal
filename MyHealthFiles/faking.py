@@ -10,6 +10,10 @@ email_domain_list = ['@gmail.com', '@yahoo.com', '@hotmail.com', '@aol.com']
 users = []
 emails = []
 
+docusers = []
+docemails = []
+
+
 print("INSERT INTO `Patients` (`PatientID`, `FirstName`, `LastName`, `SSN`, `DOB`, `PhoneNum`, `Email`, `Address`)")
 print("VALUES ")
 while i < 50:
@@ -47,6 +51,8 @@ while i < 50:
         print("\t(" + str(i) + ", '" + email + "', '" + password + "'),")
 print("\n")
 
+
+
 # THIS IS THE INSERTION FOR DOCTORS
 i = 100000000
 print("INSERT INTO `Doctors` (`DocID`, `FirstName`, `LastName`, `DOB`, `Email`, `PhoneNum`)")
@@ -56,14 +62,30 @@ while i < 100000050:
     lastname = fake.last_name()
     dob = fake.date()
     phoneNum = fake.phone_number()
-    email = lastname.lower() + str(i % 10000) + fake.word(ext_word_list=email_domain_list)
+    docemail = lastname.lower() + str(i % 10000) + fake.word(ext_word_list=email_domain_list)
     address = fake.address()
+    docemails.append(docemail)
+    docusers.append(lastname.lower() + str(random.randint(11,99)))
     i += 1
     if i == 100000050:
-        print("\t(" + str(i) + ", '" + firstname + "', '" + lastname + "', '" + dob + "', '" + email + "', '" + phoneNum + "');")
+        print("\t(" + str(i) + ", '" + firstname + "', '" + lastname + "', '" + dob + "', '" + docemail + "', '" + phoneNum + "');")
     else:
-        print("\t(" + str(i) + ", '" + firstname + "', '" + lastname + "', '" + dob + "', '" + email + "', '" + phoneNum + "'),")
+        print("\t(" + str(i) + ", '" + firstname + "', '" + lastname + "', '" + dob + "', '" + docemail + "', '" + phoneNum + "'),")
+print("\n")
+
+#TO GENERATE LIST OF DOCTOR LOGIN DATA
+i = 100000000
+print("INSERT INTO `DocUsers` (`DID`, `Email`, `Password`)")
+print("VALUES ")
+while i < 100000050:
+    docemail = docemails[i-100000000]
+    password = ''.join(random.choice(password_characters) for i in range(12))
+    i += 1
     
+    if i == 100000050:
+        print("\t(" + str(i) + ", '" + docemail + "', '" + password + "');")
+    else:
+        print("\t(" + str(i) + ", '" + docemail + "', '" + password + "'),")
 print("\n")
 
 # THIS IS THE INSERTION FOR INSPLANS

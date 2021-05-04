@@ -16,9 +16,9 @@
 			<h2 class="top-text">Welcome, <?php echo $_SESSION['name']; ?>!</h2>
 			<p class="itemize"><a href="index.php">Home</a></p>
 			<p class="itemize"><a href="appointments.php">Create Appointments</a></p>
-			<p class="itemize"><a href="index.php">Purchase Pharmaceuticals</a></p>
-			<p class="itemize"><a href="index.php">Review Your Insurance Plans</a></p>
-			<p class="itemize"><a href="index.php">See Your Billing Statements</a></p>
+			<p class="itemize"><a href="pharmaceuticals.php">Purchase Pharmaceuticals</a></p>
+			<p class="itemize"><a href="insurancePlans.php">Review Your Insurance Plans</a></p>
+			<p class="itemize"><a href="billings.php">See Your Billing Statements</a></p>
 			
 			<form method="post" action="appointments.php">
 				<button type="submit" name="logout">Sign Out</button>

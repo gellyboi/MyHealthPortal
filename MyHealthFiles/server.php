@@ -18,11 +18,22 @@
 	
 
 	//========== Database Connection ==========
+	//$CONN IS FOR PATIENT DATABASE
 	$conn = new mysqli($servername, $username, "", "db2", $sqlport, $socket);
+	//BELOW IS FOR ACCESSING DOCTOR DATABASE
+	$connDoc = new mysqli($servername, $username, "", "db1", $sqlport, $socket);
+	//BELOW IS FOR ACCESSING SERVICE SELECTION DATABASE
+	$connSSDB = new mysqli($servername, $username, "", "db3", $sqlport, $socket);
 
 	// Check connection
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
+	}
+	if ($connDoc->connect_error) {
+		die("Connection failed: " . $connDoc->connect_error);
+	}
+	if ($connSSDB->connect_error) {
+		die("Connection failed: " . $connSSDB->connect_error);
 	}
 	
 	//=========== Register User ===============
@@ -99,6 +110,9 @@
 		$email = mysqli_real_escape_string($conn, $_POST['email']);
 		$password = mysqli_real_escape_string($conn, $_POST['password']);
 		
+		$docEmail = mysqli_real_escape_string($connDoc, $_POST['email']);
+		$docPassword = mysqli_real_escape_string($connDoc, $_POST['password']);
+		
 		//are there empty fields?
 		if(empty($email)){
 			array_push($errorList, "Empty emails are not allowed.");
@@ -106,27 +120,51 @@
 		if(empty($password)){
 			array_push($errorList, "Empty passwords are not allowed.");
 		}
+		
 		//No errors? proceed.
 		if(count($errorList) == 0){
-			//Query patient DB for login credentials
+			//Query patient DB, doctor DB for login credentials
 			$pQuery = "SELECT * FROM Users WHERE Email='$email' AND Password='$password';";
-			$result = mysqli_query($conn, $pQuery);
-			$user = mysqli_fetch_assoc($result);
+			$dQuery = "SELECT * FROM DocUsers WHERE Email='$docEmail' AND Password='$docPassword';";
+			$pResult = mysqli_query($conn, $pQuery);
+			$user = mysqli_fetch_assoc($pResult);
+			$dResult = mysqli_query($connDoc, $dQuery);
+			$userDoc = mysqli_fetch_assoc($dResult);
 			
-			//are credentials unique?
-			if(mysqli_num_rows($result) == 1){
-				//set session specific attributes.
-				//get name of patient from "SELECT FirstName FROM Patients WHERE PatientID = $user['PID'];"
-				$_SESSION['pid'] = $user['PID'];
-				$pQuery = "SELECT * FROM Patients WHERE PatientID = $user[PID]";
-				$result = mysqli_query($conn, $pQuery);
-				$user = mysqli_fetch_assoc($result);
-				$_SESSION['name'] = $user['FirstName'];
-				$_SESSION['successMsg'] = "You are now logged in.";
-				header('location: index.php');
-			} else {
-				//if no unique match, return errorMsg
-				array_push($errorList, "Credentials do not match.");
+			if(isset($user['PID'])){
+				//are credentials unique?
+				if(mysqli_num_rows($pResult) == 1){
+					//set session specific attributes.
+					//get name of patient from "SELECT FirstName FROM Patients WHERE PatientID = $user['PID'];"
+					$_SESSION['pid'] = $user['PID'];
+					$pQuery = "SELECT * FROM Patients WHERE PatientID = $user[PID]";
+					$result = mysqli_query($conn, $pQuery);
+					$user = mysqli_fetch_assoc($result);
+					$_SESSION['name'] = $user['FirstName'];
+					$_SESSION['successMsg'] = "You are now logged in.";
+					header('location: index.php');
+				} else {
+					//if no unique match, return errorMsg
+					array_push($errorList, "Credentials do not match.");
+				}
+			}
+			if(isset($userDoc['DID'])){
+				//are credentials unique?
+				if(mysqli_num_rows($dResult) == 1){
+					array_push($errorList, "There is a match");
+					//set session specific attributes.
+					//get name of patient from "SELECT FirstName FROM Patients WHERE PatientID = $user['PID'];"
+					$_SESSION['did'] = $userDoc['DID'];
+					$dQuery = "SELECT * FROM Doctors WHERE DocID = $user[DID]";
+					$result = mysqli_query($connDoc, $dQuery);
+					$userDoc = mysqli_fetch_assoc($result);
+					$_SESSION['name'] = $userDoc['FirstName'];
+					$_SESSION['successMsg'] = "You are now logged in.";
+					header('location: index.php');
+				} else {
+					//if no unique match, return errorMsg
+					array_push($errorList, "Credentials do not match.");
+				}
 			}
 		}
 	}
@@ -137,6 +175,7 @@
 		session_destroy();
 		unset($_SESSION['name']);
 		unset($_SESSION['pid']);
+		unset($_SESSION['did']);
 		header('location: login.php');
 		
 	}
