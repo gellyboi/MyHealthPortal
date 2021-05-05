@@ -15,10 +15,19 @@
 		<div id="side-panel">
 			<h2 class="top-text">Welcome, <?php echo $_SESSION['name']; ?>!</h2>
 			<p class="itemize"><a href="index.php">Home</a></p>
+			
+			<?php if (isset($_SESSION['pid'])) : ?>
+			<p class="itemize"><a href="serviceSelection.php">Choose Services</a></p>
 			<p class="itemize"><a href="appointments.php">Create Appointments</a></p>
 			<p class="itemize"><a href="pharmaceuticals.php">Purchase Pharmaceuticals</a></p>
 			<p class="itemize"><a href="insurancePlans.php">Review Your Insurance Plans</a></p>
 			<p class="itemize"><a href="billings.php">See Your Billing Statements</a></p>
+			
+			<?php elseif (isset($_SESSION['did'])) : ?>
+			<!-- Doctor Links -->
+			<p>Doctor links here</p>
+			<?php endif; ?>
+			
 			
 			<form method="post" action="appointments.php">
 				<button type="submit" name="logout">Sign Out</button>
@@ -28,7 +37,12 @@
 		<div id="center-panel">
 			<!-- MAIN BODY DIV WILL LIST CONVENIENT INFORMATION; PATIENT PROFILE MAYBE?... -->
 			<!-- BASICALLY JUST ANOTHER TABLE RETURNED BY PRECANNED QUERY -->
-			<!-- FOR APPOINTMENTS WE WANT TO BE ABLE TO CHOOSE DOCTORS TO MAKE APPOINTMENTS WITH, SO LIST THE DOCTORS -->
+			<!-- FOR APPOINTMENTS WE WANT TO BE ABLE TO CHOOSE DOCTORS TO MAKE APPOINTMENTS WITH, SO LIST THE DOCTORS** -->
+			
+			<!-- **THE SELECTION OF DOCTORS SHOULD BE RECORDED BY SERVICE SELECTION -->
+			<!-- THIS WAY, WE CAN HAVE DOCTORS CHOSEN BY THE SPECIFIC PATIENT LISTED AS RADIO BUTTONS WITH MINIMAL CLUTTER -->
+			
+			
 			<h2 class="top-text">Choose a doctor to make an appointment with, and fill in other necessary information:</h2>
 			<?php
 				$dQuery = "SELECT * FROM Doctors ORDER BY LastName;";

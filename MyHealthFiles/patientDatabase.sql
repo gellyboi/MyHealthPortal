@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `InsProviders`(
 	PlanID int,
 	Category varchar(32),
 	Address varchar(127),
-	email varchar(48),
+	Email varchar(48),
 	PhoneNum varchar(20),
 	FOREIGN KEY (PlanID) REFERENCES InsPlans(PlanID)
 );
@@ -106,6 +106,7 @@ CREATE TABLE IF NOT EXISTS `InsPlans`(
 
 --table of prescriptions that are okayed for patients
 --DESCRIBES PatientID(Foreign), DocID(Foreign), PrescriptionName, Date
+--this should be okay to insert into database as empty
 CREATE TABLE IF NOT EXISTS `Prescriptions`(
 	PatientID int,
 	DocID int,
@@ -114,6 +115,8 @@ CREATE TABLE IF NOT EXISTS `Prescriptions`(
 	FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
 	FOREIGN KEY (DocID) REFERENCES Doctors(DocID)
 );
+
+--table of available prescriptions
 
 --table of pharmacies that patients can get prescriptions from
 --DESCRIBES PharmacyID, PharmacyName, Phone#, PrescriptionName(From prescriptions)

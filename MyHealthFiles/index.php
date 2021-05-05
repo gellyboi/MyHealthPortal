@@ -35,7 +35,7 @@
 		<p class="itemize"><a href="index.php">Home</a></p>
 		
 		<?php if (isset($_SESSION['pid'])) : ?>
-		
+		<p class="itemize"><a href="serviceSelection.php">Choose Services</a></p>
 		<p class="itemize"><a href="appointments.php">Create Appointments</a></p>
 		<p class="itemize"><a href="pharmaceuticals.php">Purchase Pharmaceuticals</a></p>
 		<p class="itemize"><a href="insurancePlans.php">Review Your Insurance Plans</a></p>

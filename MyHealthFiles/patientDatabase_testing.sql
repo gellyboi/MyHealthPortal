@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `InsProviders`(
 	CompanyName varchar(32),
 	Category varchar(32),
 	Address varchar(127),
-	email varchar(48),
+	Email varchar(48),
 	PhoneNum varchar(20),
 	PlanID int,
 	PRIMARY KEY (CompanyID),
@@ -90,10 +90,12 @@ CREATE TABLE IF NOT EXISTS `PharmacyRecords`(
 CREATE TABLE IF NOT EXISTS `Prescriptions`(
 	PatientID int,
 	DocID int,
+	PharmacyID int,
 	PrescriptionName varchar(32),
 	ScripDate varchar(10),
 	FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
-	FOREIGN KEY (DocID) REFERENCES Doctors(DocID)
+	FOREIGN KEY (DocID) REFERENCES Doctors(DocID),
+	FOREIGN KEY (PharmacyID) REFERENCES Pharmacies(PharmacyID)
 );
 
 INSERT INTO `Patients` (`PatientID`, `FirstName`, `LastName`, `SSN`, `DOB`, `PhoneNum`, `Email`, `Address`)
@@ -464,3 +466,56 @@ Johnview, NH 21019', 'latoyaromero@hotmail.com', '9304277804', 200000048),
 Jenniferburgh, NY 39529', 'gpotter@parker.com', '001-421-859-9300x3908', 200000049),
 	(300000050, 'Murphy, Bishop and Chang', 'HMO', '72236 Gomez Vista
 Thomasmouth, VA 85565', 'tlarson@daniels-delgado.com', '4119731393', 200000050);
+
+INSERT INTO `Pharmacies` (`PharmacyID`, `PharmacyName`, `PhoneNum`, `Address`)
+VALUES
+        (400000001, 'Taylor Ltd', '001-134-984-5608x411', '723 Dillon Island Suite 462
+Port Benjamin, NC 27923),
+        (400000002, 'Long Ltd', '062-573-2283x16304', '921 Boyd Grove Suite 315
+Samanthatown, CA 36974),
+        (400000003, 'Torres PLC', '(260)742-7090', '52335 Shawn Stream Suite 997
+North Andrew, HI 45527),
+        (400000004, 'Lee LLC', '468-667-3280x9201', '81982 Sandra Circles Apt. 488
+Ramirezfort, MA 50535),
+        (400000005, 'Moon, Green and Weber', '753.046.6843', '42812 Robinson Estate
+Mollytown, CA 62103),
+        (400000006, 'Smith, Johnston and Douglas', '(186)117-1695x86528', '1402 Bridget Village
+Lake Dannymouth, WI 36718),
+        (400000007, 'Ball Group', '475.504.8870x7482', '207 Clinton Curve
+Petersenborough, OH 38468),
+        (400000008, 'Martin Group', '222.404.5635x0723', '708 Brown Heights Apt. 087
+Mitchellport, MA 09710),
+        (400000009, 'Summers-Harrison', '996.159.6667x38899', '85795 Jeffery Prairie
+Nicolehaven, TX 72553),
+        (400000010, 'Mack, Ellis and Tucker', '982-910-9748x34405', '9717 Acevedo Path
+South Katherine, OR 54188),
+        (400000011, 'Bray, Harris and Garcia', '+1-004-923-5968x80740', '789 Soto Parkways
+West Melissa, ME 59271),
+        (400000012, 'Parrish, Brown and Rodriguez', '239-629-7229x104', '275 Eddie Flats
+North Erikaberg, CO 34328),
+        (400000013, 'Martinez Inc', '+1-419-078-0926x42075', '778 Michelle Valleys Suite 443
+Jameschester, UT 98177),
+        (400000014, 'Torres-Brock', '(762)261-9325x900', '614 Johnny Mount
+Jacquelineborough, CT 57008),
+        (400000015, 'Allen-Adams', '+1-727-965-6414x877', '4688 Barnes Lodge Suite 597
+New Mary, KS 86365),
+        (400000016, 'Walton, Harvey and Lopez', '7615290912', '826 Robinson Plains Apt. 304
+Angelafurt, NV 02645),
+        (400000017, 'Brown, Bates and Davis', '001-246-971-3854x92671', 'PSC 4139, Box 8116
+APO AP 69618),
+        (400000018, 'Hall Ltd', '(081)281-4310x6438', '865 Jones Streets Suite 888
+Mariatown, PA 33343),
+        (400000019, 'Davis, Ellison and Perry', '758-936-6336', '01511 Laura Vista
+Marissaview, AK 44386),
+        (400000020, 'Smith PLC', '+1-503-066-2060x58661', '0243 Richard Well
+East Melissa, AR 11889),
+        (400000021, 'Snyder-Bradford', '(587)759-6875x30893', '1184 Kyle Row
+Wilsonside, VA 75423),
+        (400000022, 'Clark LLC', '(332)352-7111x3185', '76182 Julie Trace Suite 777
+Jessicaland, SD 10636),
+        (400000023, 'Reynolds, Taylor and Orr', '(601)048-2634', '315 Beltran Mountains Suite 557
+Seanport, WI 98814),
+        (400000024, 'Turner-Willis', '462.587.2004x9899', '892 Leach Tunnel Apt. 193
+Williammouth, OR 21847),
+        (400000025, 'Browning Inc', '+1-639-598-0752x5084', '280 Melendez Vista Apt. 286
+New Arthur, MA 15520);
