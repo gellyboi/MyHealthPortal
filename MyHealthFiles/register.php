@@ -10,7 +10,7 @@
 	</head>
 	<body>
 		<div id="header-panel">
-			<h1>My Health Portal Registration</h1>
+			<h1 class="center-text">My Health Portal Registration</h1>
 		</div>
 		<div id="login-panel">
 			<form method="post" action="register.php">
