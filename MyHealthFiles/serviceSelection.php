@@ -47,7 +47,7 @@
     <!-- $connSSDB is the selection service database connection -->
     <!-- Need to get insurance and pharmacy data from patient database ($conn) -->
     <?php
-      $insQuery = "SELECT * FROM InsCompanies";
+      $insQuery = "SELECT * FROM InsProviders";
       $pharmQuery = "SELECT * FROM Pharmacies";
       $insResult = mysqli_query($conn, $insQuery);
       $pharmResult = mysqli_query($conn, $pharmQuery);
@@ -55,7 +55,7 @@
 
     <!-- One to One ratio of plans to providers to make it simpler -->
 		<h2 class="top-text">Choose an Insurance Company and Pharmacy:</h2>
-      <form method="post" action="serviceselection.php">
+      <form method="post" action="serviceSelection.php">
         <label for="insCompany">Insurance Companies:</label>  
         <select name="insCompany">
           <?php while($row = mysqli_fetch_assoc($insResult)){  ?>
@@ -82,7 +82,7 @@
       $SSDOQuery = "SELECT * FROM SSDO WHERE PatientID=$_SESSION[pid] AND InsuranceID=$insID AND PharmacyID=$pharmID;";
       $SSDOResult = mysqli_query($connSSDB, $SSDOQuery);
 
-      if(mysqli_num_rows($SSDOResult)){
+      if(mysqli_num_rows($SSDOResult) == 0){
         //make da query LESS GOOOOO
         $SSDOQuery = "INSERT INTO `SSDO`(`PatientID`, `InsuranceID`, `PharmacyID`) VALUES ($_SESSION[pid], $insID, $pharmID);";
         $SSDOResult = mysqli_query($connSSDB, $SSDOQuery);
@@ -101,7 +101,7 @@
     ?>
 
     <h2 class="top-text">Choose a Doctor</h2>
-    <form method="post" action="serviceselection.php">
+    <form method="post" action="serviceSelection.php">
       <label for="doctors">Insurance Companies:</label>  
       <select name="doctors">
         <?php while($row = mysqli_fetch_assoc($docResult)){  ?>
@@ -116,9 +116,17 @@
     <?php if(isset($_POST['SSDDChoice'])){
       //Insert to SERVICE SELECTION DATABASE
       $docID = $_POST['doctors'];
-      //make da query LESS GOOOOO
-      $SSDDQuery = "INSERT INTO `SSDD`(`PatientID`, `DocID`) VALUES ($_SESSION[pid], $docID);";
+	  
+	  //Let's make sure there's no duplicates
+      $SSDDQuery = "SELECT * FROM SSDO WHERE PatientID=$_SESSION[pid] AND DocID=$docID;";
       $SSDDResult = mysqli_query($connSSDB, $SSDDQuery);
+	  
+	  if(mysqli_num_rows($SSDDResult) == 0){
+		//make da query LESS GOOOOO
+		$SSDDQuery = "INSERT INTO `SSDD`(`PatientID`, `DocID`) VALUES ($_SESSION[pid], $docID);";
+		$SSDDResult = mysqli_query($connSSDB, $SSDDQuery);
+	  }
+      
     } ?>
     <?php if(mysqli_affected_rows($connSSDB) > 0) : ?>
     <p>Successfully added doctor!</p>
