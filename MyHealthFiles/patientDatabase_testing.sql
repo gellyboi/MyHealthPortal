@@ -68,6 +68,33 @@ CREATE TABLE IF NOT EXISTS `RegisteredPlans`(
 	FOREIGN KEY (PatientID) REFERENCES Patients(PatientID)
 );
 
+CREATE TABLE IF NOT EXISTS `Pharmacies`(
+	PharmacyID int,
+	PharmacyName varchar(32),
+	PhoneNum varchar(20),
+	Address varchar(127)
+	--Any more attributes?
+	PRIMARY KEY(PharmacyID)
+);
+
+CREATE TABLE IF NOT EXISTS `PharmacyRecords`(
+	PatientID int,
+	PharmacyID int,
+	PrescriptionName varchar(32),
+	PurchaseDate varchar(10),
+	Cost float(9,2),
+	FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+	FOREIGN KEY (PharmacyID) REFERENCES Pharmacies(PharmacyID)
+);
+
+CREATE TABLE IF NOT EXISTS `Prescriptions`(
+	PatientID int,
+	DocID int,
+	PrescriptionName varchar(32),
+	ScripDate varchar(10),
+	FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+	FOREIGN KEY (DocID) REFERENCES Doctors(DocID)
+);
 
 INSERT INTO `Patients` (`PatientID`, `FirstName`, `LastName`, `SSN`, `DOB`, `PhoneNum`, `Email`, `Address`)
 VALUES 

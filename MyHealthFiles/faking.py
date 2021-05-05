@@ -117,6 +117,43 @@ while i < 300000050:
     if i == 300000050:
         print("\t(" + str(i) + ", '" + company + "', '" + category + "', '" + address + "', '" + email + "', '" + phoneNum + "', " + str(j) + ");")
     else:
-        print("\t(" + str(i) + ", '" + company + "', '" + category + "', '" + address + "', '" + email + "', '" + phoneNum + "', " + str(j) +"),")
+        print("\t(" + str(i) + ", '" + company + "', '" + category + "', '" + address + "', '" + email + "', '" + phoneNum + "', " + str(j) + "),")
+    
+print("\n")
+
+# THIS IS THE INSERTION FOR PHARMACIES
+i = 400000000
+print("INSERT INTO `Pharmacies` (`PharmacyID`, `PharmacyName`, `PhoneNum`, `Address`)")
+print("VALUES ")
+while i < 400000025:
+    pharmacy = fake.company()
+    phoneNum = fake.phone_number()
+    address = fake.address()
+    i += 1
+    j += 1
+    if i == 400000025:
+        print("\t(" + str(i) + ", '" + pharmacy + "', '" + phoneNum + "', '" + address + ");")
+    else:
+        print("\t(" + str(i) + ", '" + pharmacy + "', '" + phoneNum + "', '" + address + "),")
+    
+print("\n")
+
+
+
+
+# THIS IS THE INSERTION FOR PRESCRIPTIONS
+i = 500000000
+print("INSERT INTO `Prescriptions` (`PharmacyID`, `PharmacyName`, `PhoneNum`, `Address`)")
+print("VALUES ")
+while i < 400000025:
+    pharmacy = fake.company()
+    phoneNum = fake.phone_number()
+    address = fake.address()
+    i += 1
+    j += 1
+    if i == 400000025:
+        print("\t(" + str(i) + ", '" + pharmacy + "', '" + phoneNum + "', '" + address + ");")
+    else:
+        print("\t(" + str(i) + ", '" + pharmacy + "', '" + phoneNum + "', '" + address + "),")
     
 print("\n")
