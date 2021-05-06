@@ -47,7 +47,8 @@
 			<form method="post" action="insurancePlans.php">
 				<?php while($row = mysqli_fetch_assoc($result)){  ?>
 				
-				<input type="radio" name="insChoice" value="<?php echo 200000000 + $i; ?>">
+				<input type="radio" name="insChoice" value="<?php echo $row['PlanID']; ?>">
+				<!-- <input type="radio" name="insChoice" value="<?php echo 200000000 + $i; ?>"> -->
 				<label for="insChoice">
 				<?php echo $row['CompanyName']."; ".$row['Category']."; (".$row['PhoneNum'].")".
 				"<br>Deductible: $".$row['AnnualDeductible'].", Annual Premium: $".$row['AnnualPremium'].", Annual Coverage: $".$row['AnnualCoverage'].", Lifetime Coverage: $".$row['LifetimeCoverage']; ?>
@@ -61,8 +62,16 @@
 			</form>
 			<?php 
 			if(isset($_POST['registerPlan'])){
-				$addPlan = "INSERT INTO `RegisteredPlans` (`PlanID`, `PatientID`) VALUES ($_POST[insChoice], $_SESSION[pid]);";
-				$result = mysqli_query($conn, $addPlan);
+				$planQuery = "SELECT * FROM RegisteredPlans WHERE PatientID=$_SESSION[pid] AND PlanID=$_POST[insChoice]";
+				$result = mysqli_query($conn, $planQuery);
+				
+				if(mysqli_num_rows($result) > 0){
+					echo "<p>You have already registered for this plan!</p>";
+				} else {
+					$addPlan = "INSERT INTO `RegisteredPlans` (`PlanID`, `PatientID`) VALUES ($_POST[insChoice], $_SESSION[pid]);";
+					$result = mysqli_query($conn, $addPlan);
+				}
+				
 			}
 			
 			?>

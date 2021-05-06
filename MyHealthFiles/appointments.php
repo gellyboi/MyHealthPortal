@@ -45,7 +45,25 @@
 			
 			<h2 class="top-text">Choose a doctor to make an appointment with, and fill in other necessary information:</h2>
 			<?php
-				$dQuery = "SELECT * FROM Doctors ORDER BY LastName;";
+				//Find doctors patient chose from SSDB
+				$sQuery = "SELECT * FROM SSDD WHERE PatientID=$_SESSION[pid];";
+				$sResult = mysqli_query($connSSDB, $sQuery);
+				$docList = array();
+				while($row = mysqli_fetch_assoc($sResult)){
+					array_push($docList, $row['DocID']);
+				}
+				//for each doctor found, append to query
+				$dQuery = "SELECT * FROM Doctors WHERE";
+				$firstPass = true;
+				foreach($docList as $doctor){
+					if($firstPass){
+						$firstPass = false;
+						$dQuery .= " DocID=$doctor";
+					} else {
+						$dQuery .= " OR DocID=$doctor";
+					}
+				}
+				
 				$result = mysqli_query($conn, $dQuery);
 				$i = 1;
 			?>
@@ -54,7 +72,7 @@
 				<label for="docs">Choose a Doctor:</label>
 				<select name="docs">
 					<?php while($row = mysqli_fetch_assoc($result)){  ?>
-						<option value=<?php echo 100000000 + $i; ?>>Dr. <?php echo $row['FirstName']." ".$row['LastName'].",&nbsp;&nbsp;&nbsp;&nbsp;(".$row['Email'].")"; ?></option>
+						<option value=<?php echo $row['DocID']; ?>>Dr. <?php echo $row['FirstName']." ".$row['LastName'].",&nbsp;&nbsp;&nbsp;&nbsp;(".$row['Email'].")"; ?></option>
 					<?php $i++;}; ?>
 				</select><br>
 				<div class="input-group">
