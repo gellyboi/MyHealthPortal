@@ -60,10 +60,10 @@
 				echo "<p>Patient has a policy that covers percentage of treatments.</p>";
 				$row = mysqli_fetch_assoc($result);
 				$hasPolicy = true;
-				$policyID = $row['InsuranceID'] - 100000000;
+				$_SESSION['planID'] = $row['InsuranceID'] - 100000000;
 			} else {
 				echo "<p>Patient has no insurance policy.</p>";
-				$policyID = "";
+				$policyID = NULL;
 			}
 			
 		?>
@@ -124,7 +124,7 @@
 				$patCost = $totCost;
 			}
 			
-			$recQuery = "INSERT INTO `PatientRecords`(`PatientID`, `PlanID`, `PrescriptionID`, `RecDate`, `Treatment`, `CostToIns`, `CostToPatient`) VALUES ($_POST[appointments], $policyID, $_POST[prescription], '$date', '$treatment', '$insCost', '$patCost');";
+			$recQuery = "INSERT INTO `PatientRecords` (`PatientID`, `PlanID`, `PrescriptionID`, `RecDate`, `Treatment`, `CostToIns`, `CostToPatient`) VALUES ($_POST[appointments], $_SESSION[planID], $_POST[prescription], '$date', '$treatment', '$insCost', '$patCost');";
 			$result = mysqli_query($conn, $recQuery);
 			
 			//Prescription assigned to patient?
@@ -134,20 +134,22 @@
 				$valuesQuery = "SELECT * FROM Products WHERE PrescriptionID=$prescripID";
 				$result = mysqli_query($conn, $valuesQuery);
 				$fetch = mysqli_fetch_assoc($result);
-				$prescripQuery = "INSERT INTO `Prescriptions`(`PatientID`, `DocID`, `PrescriptionName`, `ScripDate`) VALUES ($_POST[appointments], $_SESSION[did], '$fetch[PrescriptionName]', '$date')";
-				
+				$prescripQuery = "INSERT INTO `Prescriptions` (`PatientID`, `DocID`, `PrescriptionName`, `ScripDate`) VALUES ($_POST[appointments], $_SESSION[did], '$fetch[PrescriptionName]', '$date')";
+				$result = mysqli_query($conn, $prescripQuery);
 			} else {
 				//do nothing?
+				$prescripID = NULL;
 			}
 			
-			$deductibleQuery = "SELECT * From InsPlans WHERE PlanID=$PolicyID";
+			$deductibleQuery = "SELECT * From InsPlans WHERE PlanID=$_SESSION[planID];";
 			$result = mysqli_query($conn, $deductibleQuery);
 			$row = mysqli_fetch_assoc($result);
+			$deductible = intval($row['AnnualDeductible']);
 			//Add treatment cost to table Costs
-			$costQuery = "INSERT INTO `Costs`(`PatientID`, `PlanID`, `PrescriptionID`, `AppointmentID`, `Treatment`, `AllowedCost`, `InNetworkCoverage`, `OutNetworkCoverage`, `Deductible`) 
-			VALUES  ($_POST[appointments], $policyID, $appID, '$treatment', '$totCost', '$insCost', '0', '$row[AnnualDeductible]');";
+			$costQuery = "INSERT INTO `Costs` (`PatientID`, `PlanID`, `PrescriptionID`, `AppointmentID`, `Treatment`, `AllowedCost`, `InNetworkCoverage`, `OutNetworkCoverage`, `Deductible`) VALUES ($_POST[appointments], $_SESSION[planID], $prescripID, $appID, '$treatment', '$totCost', '$insCost', '0', '$deductible');";
 			$result = mysqli_query($conn, $costQuery);
-			
+
+			unset($_SESSION['planID']);
 		?>
 		<p>Submitted patient records!</p>
 		<?php endif; ?>
