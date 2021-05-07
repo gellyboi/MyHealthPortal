@@ -95,9 +95,9 @@ print("VALUES ")
 while i < 200000050:
     i += 1
     if i == 200000050:
-        print("\t(" + str(i) + ", '" + str(random.randint(1000,5000)) + "', '" + str(random.randint(4000,10000)) + "', '" + str(random.randint(1000,10000)) + "', '" + str(random.randint(100000,500000)) + "');")
+        print("\t(" + str(i) + ", '" + str(random.randint(1000,5000)) + "', '" + str(random.randint(3000,10000)) + "', '" + str(random.randint(11000,50000)) + "', '" + str(random.randint(100000,500000)) + "');")
     else:
-        print("\t(" + str(i) + ", '" + str(random.randint(1000,5000)) + "', '" + str(random.randint(4000,10000)) + "', '" + str(random.randint(1000,10000)) + "', '" + str(random.randint(100000,500000)) + "'),")
+        print("\t(" + str(i) + ", '" + str(random.randint(1000,5000)) + "', '" + str(random.randint(3000,10000)) + "', '" + str(random.randint(11000,50000)) + "', '" + str(random.randint(100000,500000)) + "'),")
 print("\n")
 
 # THIS IS THE INSERTION FOR INSPROVIDERS
@@ -130,7 +130,6 @@ while i < 400000025:
     phoneNum = fake.phone_number()
     address = fake.address()
     i += 1
-    j += 1
     if i == 400000025:
         print("\t(" + str(i) + ", '" + pharmacy + "', '" + phoneNum + "', '" + address + "');")
     else:
@@ -142,19 +141,29 @@ print("\n")
 
 #Let's get some prescriptions in there
 
-# THIS IS THE INSERTION FOR PRESCRIPTIONS
-#i = 500000000
-#print("INSERT INTO `Prescriptions` (`PharmacyID`, `PharmacyName`, `PhoneNum`, `Address`)")
-#print("VALUES ")
-#while i < 400000025:
-#    pharmacy = fake.company()
-#    phoneNum = fake.phone_number()
-#    address = fake.address()
-#    i += 1
-#    j += 1
-#    if i == 400000025:
-#        print("\t(" + str(i) + ", '" + pharmacy + "', '" + phoneNum + "', '" + address + ");")
-#    else:
-#        print("\t(" + str(i) + ", '" + pharmacy + "', '" + phoneNum + "', '" + address + "),")
-#    
-#print("\n")
+file1 = open('prescriptions.txt', 'r')
+Lines = file1.readlines()
+prescriptionList = []
+ 
+#count = 0
+# Strips the newline character
+for line in Lines:
+    #count += 1
+    prescriptionList.append(line.strip())
+
+
+# THIS IS THE INSERTION FOR PRODUCTS
+i = 500000000
+print("INSERT INTO `Products` (`PrescriptionID`, `PrescriptionName`, `Amount`, `Cost`)")
+print("VALUES ")
+while i < 500000116:
+    amt = 10 * random.randint(2,6)
+    cost = random.randint(25, 140)
+    prescription = prescriptionList.pop(0)
+    i += 1
+    if i == 500000116:
+        print("\t(" + str(i) + ", '" + prescription + "', " + str(amt) + ", '" + str(cost) + "');")
+    else:
+        print("\t(" + str(i) + ", '" + prescription + "', " + str(amt) + ", '" + str(cost) + "'),")
+        
+print("\n")

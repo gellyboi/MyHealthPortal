@@ -107,24 +107,34 @@ CREATE TABLE IF NOT EXISTS `InsPlans`(
 --table of prescriptions that are okayed for patients
 --DESCRIBES PatientID(Foreign), DocID(Foreign), PrescriptionName, Date
 --this should be okay to insert into database as empty
-CREATE TABLE IF NOT EXISTS `Prescriptions`(
+CREATE TABLE IF NOT EXISTS `PrescriptionRecords`(
 	PatientID int,
 	DocID int,
+	PrescriptionID int,
 	PrescriptionName varchar(32),
 	ScripDate varchar(10),
 	FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
-	FOREIGN KEY (DocID) REFERENCES Doctors(DocID)
+	FOREIGN KEY (DocID) REFERENCES Doctors(DocID),
+	FOREIGN KEY (PrescriptionID) REFERENCES Products(PrescriptionID)
 );
 
 --table of available prescriptions
+CREATE TABLE IF NOT EXISTS `Products`(
+	PrescriptionID int,
+	PrescriptionName varchar(32),
+	Amount int,
+	Cost double(4,2)
+	PRIMARY KEY (PrescriptionID)
+);
 
 --table of pharmacies that patients can get prescriptions from
 --DESCRIBES PharmacyID, PharmacyName, Phone#, PrescriptionName(From prescriptions)
 CREATE TABLE IF NOT EXISTS `Pharmacies`(
 	PharmacyID int,
 	PharmacyName varchar(32),
-	PhoneNum varchar(20)
-	--Any more attributes?
+	PhoneNum varchar(20),
+	Address varchar(127)
+	PRIMARY KEY (PharmacyID)
 );
 
 --table of when patients have gotten their medication
