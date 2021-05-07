@@ -107,7 +107,7 @@
       <select name="doctors">
         <?php while($row = mysqli_fetch_assoc($docResult)){  ?>
           <option value=<?php echo $row['DocID']; ?>>Dr. <?php echo $row['FirstName'].", ".$row['LastName'].", (".$row['Email'].")"; ?></option>
-        <?php $i++;}; ?>
+        <?php }; ?>
       </select>
       <div class="input-group">
         <button type="submit" name="SSDDChoice">Submit Choice</button>
