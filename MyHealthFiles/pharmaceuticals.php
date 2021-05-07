@@ -57,10 +57,39 @@
 				<?php }; ?>
 			</select>
 			<div class="input-group">
-				<button type="submit" name="SSD0Choice">Submit Choice</button>
+				<button type="submit" name="SSDOChoice">Submit Choice</button>
 			</div>
 
 		</form>
+
+		<?php if(isset($_POST['SSDOChoice'])) {
+			$planIDQuery = "SELECT * FROM SSDO where PatientID = $_SESSION[pid]";
+			$result = mysqli_query($connSSDB, $planIDQuery);
+			$row = mysqli_fetch_assoc($result);
+			$totCost = $_SESSION['Cost'];
+			$insCost = intval(.8 * $totCost);
+			unset($_SESSION['Cost']);
+
+			$row['InsuranceID'] = $row['InsuranceID'] - 100000000; // gives us planid
+			$deductQuery = "SELECT * FROM InsPlans WHERE AnnualDeductible=$row[InsuranceID]";
+			$deductResult = mysqli_query($conn, $deductQuery);
+			$deductRow = mysqli_fetch_assoc($deductResult);
+
+					if (mysqli_num_rows($result) == 0) {
+				$planID = NULL;
+				$appID = NULL;
+				$treatment = NULL;
+						$CostQuery = "INSERT INTO Costs (PatientID, PlanID, PrescriptionID, AppointmentID, Treatment, AllowedCost, InNetworkCoverage, OutNetworkCoverage, Deductible) VALUES ($_SESSION[pid], $planID, $_SESSION[PrescriptionID], $appID, $treatment, '$totCost', '$insCost', '0', '$deductRow[AnnualDeductible]');";
+				mysqli_query($conn, $CostQuery);
+					} else {
+				$appID = NULL;
+				$treatment = NULL;
+				$CostQuery = "INSERT INTO Costs (PatientID, PlanID, PrescriptionID, AppointmentID, Treatment, AllowedCost, InNetworkCoverage, OutNetworkCoverage, Deductible) VALUES ($_SESSION[pid], $row[InsuranceID], $_SESSION[PrescriptionID], $appID, $treatment, '$totCost', '$insCost', '0', '$deductRow[AnnualDeductible]');";
+				mysqli_query($conn, $CostQuery);
+			}
+			echo "<p>Prescription was purchased!</p>";
+		}
+		?>
 	</div>
 	
 	<!-- FOOTER PANEL -->

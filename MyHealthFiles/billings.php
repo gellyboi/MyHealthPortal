@@ -44,8 +44,12 @@
 		<!-- All of these costs should be found in the Costs table, should differentiate using TypeOfCost, (TypeOfCost as varchar or int?) -->
 		<!-- Make a report for costs, maybe available as a pdf? -->
 		
-		<h2 class="top-text">Body Header</h2>
-		<p>stuff goes here</p>
+		<?php
+			$prescriptQuery = "SELECT * FROM Prescriptions INNER JOIN Products on Prescriptions.PrescriptionName = Products.PrescriptionName WHERE PatientID = $_SESSION[pid]";
+			$prescriptResult = mysqli_query($conn, $prescriptQuery);
+		?>
+		<h2 class="top-text">Billing Statement</h2>
+		
 	</div>
 	
 	<!-- FOOTER PANEL -->
