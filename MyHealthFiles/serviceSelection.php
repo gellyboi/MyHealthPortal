@@ -87,7 +87,9 @@
         //make da query LESS GOOOOO
         $SSDOQuery = "INSERT INTO `SSDO`(`PatientID`, `InsuranceID`, `PharmacyID`) VALUES ($_SESSION[pid], $insID, $pharmID);";
         $SSDOResult = mysqli_query($connSSDB, $SSDOQuery);
-      }
+      } else {
+		echo "<p>You already chose this service!</p>";
+	  }
         
     } ?>
       
@@ -126,6 +128,8 @@
 		//make da query LESS GOOOOO
 		$SSDDQuery = "INSERT INTO `SSDD`(`PatientID`, `DocID`) VALUES ($_SESSION[pid], $docID);";
 		$SSDDResult = mysqli_query($connSSDB, $SSDDQuery);
+	  } else {
+		echo "<p>You already chose this service!</p>";
 	  }
       
     } ?>
