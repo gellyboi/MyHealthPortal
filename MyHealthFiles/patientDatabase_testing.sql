@@ -90,12 +90,10 @@ CREATE TABLE IF NOT EXISTS `PharmacyRecords`(
 CREATE TABLE IF NOT EXISTS `Prescriptions`(
 	PatientID int,
 	DocID int,
-	PharmacyID int,
 	PrescriptionName varchar(32),
 	ScripDate varchar(10),
 	FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
 	FOREIGN KEY (DocID) REFERENCES Doctors(DocID),
-	FOREIGN KEY (PharmacyID) REFERENCES Pharmacies(PharmacyID)
 );
 
 CREATE TABLE IF NOT EXISTS `Products`(
@@ -109,6 +107,7 @@ CREATE TABLE IF NOT EXISTS `Products`(
 CREATE TABLE IF NOT EXISTS `Costs`(
 	PlanID int,
 	PrescriptionID int,
+	AppointmentID int,
 	Treatment varchar(255),
 	AllowedCost float(9,2),
 	InNetworkCoverage float(9,2),

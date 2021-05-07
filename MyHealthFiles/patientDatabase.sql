@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `PatientRecords`(
 --DESCRIBES Treatment, AllowedCost(cost of treatment from table or something), InNetworkCoverage,
 --OutNetworkCoverage, and deductible (probably want to add PlanID as well)
 CREATE TABLE IF NOT EXISTS `Costs`(
+	PatientID int,
 	PlanID int,
 	PrescriptionID int,
 	Treatment varchar(255),

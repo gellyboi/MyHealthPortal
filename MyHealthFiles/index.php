@@ -43,7 +43,7 @@
 		
 		<?php elseif (isset($_SESSION['did'])) : ?>
 		<!-- Doctor Links -->
-		<p>Doctor links here</p>
+		<p class="itemize"><a href="docAppointments.php">Submit Appointment Info</a></p>
 		<?php endif; ?>
 		
 		<form method="post" action="index.php">
