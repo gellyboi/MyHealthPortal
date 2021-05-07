@@ -42,22 +42,21 @@
 			<form method="post" action="insurancePlans.php">
 				<?php 
 				
-				$iQuery = "SELECT * FROM InsPlans INNER JOIN InsProviders ON InsPlans.PlanID=InsProviders.PlanID;";
-				$iResult = mysqli_query($conn, $iQuery);
-				while($iRow = mysqli_fetch_assoc($iResult)){ 
-					$query = "SELECT * FROM SSDO WHERE PatientID=$_SESSION[pid]";
-					$result = mysqli_query($connSSDB, $query);
-					$row = mysqli_fetch_assoc($result);
-					$_SESSION['compID'] = $row['InsuranceID']
+				
+				$query = "SELECT * FROM SSDO WHERE PatientID=$_SESSION[pid]";
+				$result = mysqli_query($connSSDB, $query);
+				while($row = mysqli_fetch_assoc($result)){ 
+					$_SESSION['compID'] = $row['InsuranceID'];
 				?>
-				<?php if($iRow['CompanyID'] == $_SESSION['compID']) : ?>
-				<input type="radio" name="insChoice" value="<?php echo $iRow['PlanID']; ?>">
+				<input type="radio" name="insChoice" value="<?php echo $row['InsuranceID'] - 100000000; ?>">
 				<label for="insChoice">
-				<?php echo $iRow['CompanyName']."; ".$iRow['Category']."; (".$iRow['PhoneNum'].")".
-				"<br>Deductible: $".$iRow['AnnualDeductible'].", Annual Premium: $".$iRow['AnnualPremium'].", Annual Coverage: $".$iRow['AnnualCoverage'].", Lifetime Coverage: $".$iRow['LifetimeCoverage']; ?>
+				<?php 
+					$iQuery = "SELECT * FROM InsPlans INNER JOIN InsProviders ON InsPlans.PlanID=InsProviders.PlanID WHERE CompanyID=$row[InsuranceID];";
+					$iResult = mysqli_query($conn, $iQuery);
+					$iRow = mysqli_fetch_assoc($iResult);
+					echo $iRow['CompanyName']."; ".$iRow['Category']."; (".$iRow['PhoneNum'].")"."<br>Deductible: $".$iRow['AnnualDeductible'].", Annual Premium: $".$iRow['AnnualPremium'].", Annual Coverage: $".$iRow['AnnualCoverage'].", Lifetime Coverage: $".$iRow['LifetimeCoverage']; ?>
 				</label>
 				<br><br>
-				<?php endif; ?>
 				<?php }; ?>
 				<br>
 				<div class="input-group">
@@ -67,23 +66,27 @@
 			<?php 
 			if(isset($_POST['registerPlan'])){
 				$planQuery = "SELECT * FROM RegisteredPlans WHERE PatientID=$_SESSION[pid] AND PlanID=$_POST[insChoice]";
-				$result = mysqli_query($conn, $planQuery);
+				$planResult = mysqli_query($conn, $planQuery);
 				
-				if(mysqli_num_rows($result) > 0){
-					echo "<p>You have already registered for this plan!</p>";
+				if(mysqli_num_rows($planResult) == 0){
+				$getValsQuery = "SELECT * FROM InsPlans WHERE PlanID=$_POST[insChoice]";
+				$valResult = mysqli_query($conn, $getValsQuery);
+				$row = mysqli_fetch_assoc($valResult);
+				$premium = intval($row['AnnualPremium']);
+				$deductible = intval($row['AnnualDeductible']);
+				$coverage = intval($row['AnnualCoverage']);
+				$CostQuery = "INSERT INTO Costs (PatientID, PlanID, AllowedCost, InNetworkCoverage, OutNetworkCoverage, Deductible) VALUES ($_SESSION[pid], $_POST[insChoice], '$premium', '$coverage', '0', '$deductible');";
+				$result = mysqli_query($conn, $CostQuery);
+				$addPlan = "INSERT INTO `RegisteredPlans` (`PlanID`, `PatientID`) VALUES ($_POST[insChoice], $_SESSION[pid]);";
+				$result = mysqli_query($conn, $addPlan);
+				$deleteOldPlan = "DELETE FROM `RegisteredPlans` WHERE PatientID=$_SESSION[pid] AND NOT PlanID=$_POST[insChoice];";
+				$result = mysqli_query($conn, $deleteOldPlan);
+				$removeFromCosts = "DELETE FROM Costs WHERE PatientID=$_SESSION[pid] AND NOT PlanID=$_POST[insChoice] AND PrescriptionID IS NULL AND PharmacyID IS NULL AND AppointmentID IS NULL;";
+				$result = mysqli_query($conn, $removeFromCosts);
+				echo "<p>Plan successfully registered!</p>";
+				unset($_SESSION['compID']);
 				} else {
-					$getValsQuery = "SELECT * FROM InsPlans WHERE PlanID=$_POST[insChoice]";
-					$valResult = mysqli_query($conn, $getValsQuery);
-					$row = mysqli_fetch_assoc($valResult);
-					$premium = intval($row['AnnualPremium']);
-					$deductible = intval($row['AnnualDeductible']);
-					$coverage = intval($row['AnnualCoverage']);
-					$CostQuery = "INSERT INTO Costs (PatientID, PlanID, AllowedCost, InNetworkCoverage, OutNetworkCoverage, Deductible) VALUES ($_SESSION[pid], $_POST[insChoice], '$premium', '$coverage', '0', '$deductible');";
-					$result = mysqli_query($conn, $CostQuery);
-					$addPlan = "INSERT INTO `RegisteredPlans` (`PlanID`, `PatientID`) VALUES ($_POST[insChoice], $_SESSION[pid]);";
-					$result = mysqli_query($conn, $addPlan);
-					echo "<p>Plan successfully registered!</p>";
-					unset($_SESSION['compID']);
+					echo "<p>Already Registered for plan!</p>";
 				}
 			}
 			

@@ -107,6 +107,19 @@
 				
 				<p><?php echo $row['AppDate']." ".$row['AppTime'].", Dr. ".$row['FirstName']." ".$row['LastName'].", (".$row['Email'].")"; ?></p>
 				<?php }; ?>
+			<br></br>	
+			<h2 class="top-text">Your Patient Records:</h2>
+			<?php 
+			$recQuery = "SELECT * FROM PatientRecords WHERE PatientID=$_SESSION[pid]";
+			$recResult = mysqli_query($conn, $recQuery);
+			if(mysqli_num_rows($recResult) == 0){
+				echo "<p>You have no records at the moment.</p>";
+			} else {
+				while($row = mysqli_fetch_assoc($recResult)){
+					echo "<p>Date: $row[RecDate], Treatment: $row[Treatment], Cost to Insurance: $$row[CostToIns], Cost to Patient: $$row[CostToPatient]</p>";
+				}
+			}
+			?>
 			
 			<?php endif; ?>
 		<?php elseif(isset($_SESSION['did'])) : ?>
@@ -150,6 +163,22 @@
 				<?php }; ?>
 			
 			<?php endif; ?>
+			<br></br>	
+			<h2 class="top-text">Your Patients:</h2>
+			<?php 
+			$recQuery = "SELECT * FROM SSDD WHERE DocID=$_SESSION[did]";
+			$recResult = mysqli_query($connSSDB, $recQuery);
+			if(mysqli_num_rows($recResult) == 0){
+				echo "<p>You have no patients at the moment.</p>";
+			} else {
+				while($row = mysqli_fetch_assoc($recResult)){
+					$query = "SELECT * FROM Patients WHERE PatientID=$row[PatientID]";
+					$result = mysqli_query($conn, $query);
+					$pRow = mysqli_fetch_assoc($result);
+					echo "<p>Name: $pRow[FirstName] $pRow[LastName], Date of Birth: $pRow[DOB], Phone: $pRow[PhoneNum], Email: $pRow[Email]</p>";
+				}
+			}
+			?>
 		
 		<?php endif; ?>
 		

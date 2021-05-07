@@ -59,11 +59,11 @@
 			if(mysqli_num_rows($result) > 0){
 				echo "<p>Patient has a policy that covers percentage of treatments.</p>";
 				$row = mysqli_fetch_assoc($result);
-				$_SESSION['hasPolicy'] = true;
+				$_SESSION['hasPolicy'] = 1;
 				$_SESSION['planID'] = $row['InsuranceID'] - 100000000;
 			} else {
 				echo "<p>Patient has no insurance policy.</p>";
-				$_SESSION['hasPolicy'] = false;
+				$_SESSION['hasPolicy'] = 0;
 				$policyID = NULL;
 			}
 			
