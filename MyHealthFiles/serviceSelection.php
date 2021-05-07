@@ -60,12 +60,14 @@
         <select name="insCompany">
           <?php while($row = mysqli_fetch_assoc($insResult)){  ?>
 						<option value=<?php echo $row['CompanyID']; ?>><?php echo $row['CompanyName'].", ".$row['Category'].", (".$row['Email'].")"; ?></option>
+		  <?php }; ?>
         </select>
           <br>
         <label for="pharmacy">Pharmacies:</label>
         <select name="pharmacy">
           <?php while($row = mysqli_fetch_assoc($pharmResult)){  ?>
 						<option value=<?php echo $row['PharmacyID']; ?>><?php echo $row['PharmacyName'].", ".$row['PhoneNum'].", (".$row['Address'].")"; ?></option>
+		  <?php }; ?>
         </select>
         <div class="input-group">
 					<button type="submit" name="SSDOChoice">Submit Choices</button>
@@ -103,7 +105,7 @@
 
     <h2 class="top-text">Choose a Doctor</h2>
     <form method="post" action="serviceSelection.php">
-      <label for="doctors">Insurance Companies:</label>  
+      <label for="doctors">Doctors:</label>  
       <select name="doctors">
         <?php while($row = mysqli_fetch_assoc($docResult)){  ?>
           <option value=<?php echo $row['DocID']; ?>>Dr. <?php echo $row['FirstName'].", ".$row['LastName'].", (".$row['Email'].")"; ?></option>

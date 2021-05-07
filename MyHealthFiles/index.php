@@ -57,6 +57,19 @@
 		
 		<!-- PATIENT PROFILE SECTION -->
 		<?php if(isset($_SESSION['pid'])) : ?>
+			<?php
+				//Check if patient has entries for selection service database
+				$ssdbQuery = "SELECT * FROM SSDO WHERE PatientID=$_SESSION[pid];";
+				$result = mysqli_query($connSSDB, $ssdbQuery);
+				if(mysqli_num_rows($result) == 0){
+					echo "<h2 class='top-text'>Warning! You need to select services for at least one Insurance Company and Pharmacy!</h2>";
+				}
+				$ssdbQuery = "SELECT * FROM SSDD WHERE PatientID=$_SESSION[pid];";
+				$result = mysqli_query($connSSDB, $ssdbQuery);
+				if(mysqli_num_rows($result) == 0){
+					echo "<h2 class='top-text'>Warning! You need to select services from at least one Doctor!</h2>";
+				}
+			?>
 			<?php 
 				$profileQuery = "SELECT * FROM Patients WHERE PatientID=$_SESSION[pid];";
 				$result = mysqli_query($conn, $profileQuery);
