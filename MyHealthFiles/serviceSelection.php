@@ -62,6 +62,7 @@
 						<option value=<?php echo $row['CompanyID']; ?>><?php echo $row['CompanyName'].", ".$row['Category'].", (".$row['Email'].")"; ?></option>
 				  <?php $i++;}; ?>
         </select>
+          <br>
         <label for="pharmacy">Pharmacies:</label>
         <select name="pharmacy">
           <?php while($row = mysqli_fetch_assoc($pharmResult)){  ?>
