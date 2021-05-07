@@ -105,6 +105,7 @@ CREATE TABLE IF NOT EXISTS `Products`(
 );
 
 CREATE TABLE IF NOT EXISTS `Costs`(
+	PatientID int,
 	PlanID int,
 	PrescriptionID int,
 	AppointmentID int,
