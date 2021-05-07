@@ -45,8 +45,17 @@
 		<!-- When the doctor approves of the request, the request is finalized and added to the patient's list of prescriptions -->
 		<!-- That information will be put into the Prescriptions table, with the PatientID and DocID to tell who it's for and who approved of it -->
 		<!-- Then, add a cost to the patient in the Costs table associated with PatientID -->
-		<h2 class="top-text">Body Header</h2>
-		<p>stuff goes here</p>
+		<?php
+			$prescriptQuery = "SELECT * FROM Prescriptions";
+			$prescriptResult = mysqli_query($conn, $prescriptQuery);
+		?>
+		<h2 class="top-text">Choose a Prescription</h2>
+		<form method="post" action="pharmaceuticals.php">
+			<label for="prescriptQuery">Prescriptions:</label>
+			<select name="prescriptQuery">
+		</select>
+
+		</form>
 	</div>
 	
 	<!-- FOOTER PANEL -->
