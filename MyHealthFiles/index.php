@@ -54,45 +54,90 @@
 	<div id="center-panel">
 		<!-- MAIN BODY DIV WILL LIST CONVENIENT INFORMATION; PATIENT PROFILE MAYBE?... -->
 		<!-- BASICALLY JUST ANOTHER TABLE RETURNED BY PRECANNED QUERY -->
-		<?php 
-			$profileQuery = "SELECT * FROM Patients WHERE PatientID=$_SESSION[pid];";
-			$result = mysqli_query($conn, $profileQuery);
-			$profile = mysqli_fetch_assoc($result);
-		?>
 		
-		<h2 class="top-text">My Health Profile Overview:</h2>
-		<p>Name: <?php echo "$profile[FirstName] $profile[LastName]";?></p>
-		<p>Date of Birth: <?php echo $profile['DOB']; ?></p>
-		<p>Email: <?php echo $profile['Email']; ?></p>
-		<p>Phone: <?php echo $profile['PhoneNum']; ?></p>
-		<p>Address: <?php echo $profile['Address']; ?></p>
-		<br></br>
-		
-		<!-- LIST UPCOMING APPOINTMENTS & WITH WHOM -->
-		<h2 class="top-text">Your Scheduled Appointments:</h2>
-		
-		<?php 
-			$profileQuery = "SELECT * FROM Appointments WHERE PatientID=$_SESSION[pid];";
-			$result = mysqli_query($conn, $profileQuery);
-		?>
-		
-		<?php if (mysqli_num_rows($result) == 0) : ?>
-			<p>No appointments scheduled.</p>
-		<?php endif; ?>
-		
-		<?php if (mysqli_num_rows($result) > 0) : ?>
-			
-			<p>You have appointments!</p>
-			<!-- NOW LIST THEM (QUERY SHOULD JOIN WITH DOCTOR TABLE, SO WE CAN GET A NAME) -->
+		<!-- PATIENT PROFILE SECTION -->
+		<?php if(isset($_SESSION['pid'])) : ?>
 			<?php 
-				$aQuery = "SELECT AppDate, AppTime, Reason, FirstName, LastName, Email FROM Appointments INNER JOIN Doctors ON Doctors.DocID = Appointments.DocID WHERE PatientID=$_SESSION[pid];";
-				$result = mysqli_query($conn, $aQuery);
-				while($row = mysqli_fetch_assoc($result)){
+				$profileQuery = "SELECT * FROM Patients WHERE PatientID=$_SESSION[pid];";
+				$result = mysqli_query($conn, $profileQuery);
+				$profile = mysqli_fetch_assoc($result);
 			?>
 			
-			<p><?php echo $row['AppDate']." ".$row['AppTime'].", Dr. ".$row['FirstName']." ".$row['LastName'].", (".$row['Email'].")"; ?></p>
-			<?php }; ?>
+			<h2 class="top-text">My Health Profile Overview:</h2>
+			<p>Name: <?php echo "$profile[FirstName] $profile[LastName]";?></p>
+			<p>Date of Birth: <?php echo $profile['DOB']; ?></p>
+			<p>Email: <?php echo $profile['Email']; ?></p>
+			<p>Phone: <?php echo $profile['PhoneNum']; ?></p>
+			<p>Address: <?php echo $profile['Address']; ?></p>
+			<br></br>
 			
+			<!-- LIST UPCOMING APPOINTMENTS & WITH WHOM -->
+			<h2 class="top-text">Your Scheduled Appointments:</h2>
+			
+			<?php 
+				$profileQuery = "SELECT * FROM Appointments WHERE PatientID=$_SESSION[pid];";
+				$result = mysqli_query($conn, $profileQuery);
+			?>
+			
+			<?php if (mysqli_num_rows($result) == 0) : ?>
+				<p>No appointments scheduled.</p>
+			<?php endif; ?>
+			
+			<?php if (mysqli_num_rows($result) > 0) : ?>
+				
+				<!-- NOW LIST THEM (QUERY SHOULD JOIN WITH DOCTOR TABLE, SO WE CAN GET A NAME) -->
+				<?php 
+					$aQuery = "SELECT AppDate, AppTime, Reason, FirstName, LastName, Email FROM Appointments INNER JOIN Doctors ON Doctors.DocID = Appointments.DocID WHERE PatientID=$_SESSION[pid];";
+					$result = mysqli_query($conn, $aQuery);
+					while($row = mysqli_fetch_assoc($result)){
+				?>
+				
+				<p><?php echo $row['AppDate']." ".$row['AppTime'].", Dr. ".$row['FirstName']." ".$row['LastName'].", (".$row['Email'].")"; ?></p>
+				<?php }; ?>
+			
+			<?php endif; ?>
+		<?php elseif(isset($_SESSION['did'])) : ?>
+			
+			<?php
+				//Lets get doctor's information
+				$dQuery = "SELECT * FROM Doctors WHERE DocID=$_SESSION[did];";
+				$result = mysqli_query($connDoc, $dQuery);
+				$profile = mysqli_fetch_assoc($result);
+				
+			?>
+			<!-- DOCTOR PROFILE SECTION -->
+			<h2 class="top-text">My Health Profile Overview:</h2>
+			<p>Name: <?php echo "$profile[FirstName] $profile[LastName]";?></p>
+			<p>Date of Birth: <?php echo $profile['DOB']; ?></p>
+			<p>Email: <?php echo $profile['Email']; ?></p>
+			<p>Phone: <?php echo $profile['PhoneNum']; ?></p>
+			<br></br>
+			
+			<!-- LIST UPCOMING APPOINTMENTS & WITH WHOM -->
+			<h2 class="top-text">Your Scheduled Appointments:</h2>
+			<?php 
+				$profileQuery = "SELECT * FROM Appointments WHERE DocID=$_SESSION[did];";
+				$result = mysqli_query($conn, $profileQuery);
+			?>
+			
+			<?php if (mysqli_num_rows($result) == 0) : ?>
+				<p>No appointments scheduled.</p>
+			<?php endif; ?>
+			
+			<?php if (mysqli_num_rows($result) > 0) : ?>
+				
+				<!-- NOW LIST THEM (QUERY SHOULD JOIN WITH DOCTOR TABLE, SO WE CAN GET A NAME) -->
+				<?php 
+					$aQuery = "SELECT AppDate, AppTime, FirstName, LastName, Email FROM Appointments INNER JOIN Patients ON Patients.PatientID = Appointments.PatientID WHERE DocID=$_SESSION[did];";
+					$result = mysqli_query($conn, $aQuery);
+					while($row = mysqli_fetch_assoc($result)){
+				?>
+				
+				<p><?php echo $row['AppDate']." ".$row['AppTime'].", ".$row['FirstName']." ".$row['LastName'].", (".$row['Email'].")"; ?></p>
+				<?php }; ?>
+			
+			<?php endif; ?>
+		
 		<?php endif; ?>
 		
 		<!-- ADD ANOTHER SECTION TO LIST PATIENT RECORDS (RETRIEVE FROM PatientRecords) -->
