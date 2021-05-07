@@ -59,10 +59,11 @@
 			if(mysqli_num_rows($result) > 0){
 				echo "<p>Patient has a policy that covers percentage of treatments.</p>";
 				$row = mysqli_fetch_assoc($result);
-				$hasPolicy = true;
+				$_SESSION['hasPolicy'] = true;
 				$_SESSION['planID'] = $row['InsuranceID'] - 100000000;
 			} else {
 				echo "<p>Patient has no insurance policy.</p>";
+				$_SESSION['hasPolicy'] = false;
 				$policyID = NULL;
 			}
 			
@@ -116,7 +117,7 @@
 			$date = $_POST['recDate'];
 			$treatment = $_POST['treatment'];
 			$totCost = intval($_POST['cost']);
-			if($hasPolicy){
+			if($_SESSION['hasPolicy']){
 				$insCost = intval(.8 * $totCost);
 				$patCost = $totCost - $insCost;
 			} else {
@@ -150,6 +151,7 @@
 			$result = mysqli_query($conn, $costQuery);
 
 			unset($_SESSION['planID']);
+			unset($_SESSION['hasPolicy']);
 		?>
 		<p>Submitted patient records!</p>
 		<?php endif; ?>
