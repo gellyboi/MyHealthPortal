@@ -41,22 +41,24 @@
 	<!-- BODY PANEL -->
 	<div id="center-panel">
 		<!-- For the medicines page, we want to list available options for prescriptions from Prescriptions table (once added) -->
-		<!-- We want to handle buying prescriptions by notifying doctors that a request for a prescription has been made -->
-		<!-- When the doctor approves of the request, the request is finalized and added to the patient's list of prescriptions -->
 		<!-- That information will be put into the Prescriptions table, with the PatientID and DocID to tell who it's for and who approved of it -->
 		<!-- Then, add a cost to the patient in the Costs table associated with PatientID -->
 		<?php
-			$prescriptQuery = "SELECT * FROM Prescriptions";
+			$prescriptQuery = "SELECT * FROM Prescriptions INNER JOIN Products on Prescriptions.PrescriptionName = Products.PrescriptionName WHERE PatientID = $_SESSION[pid]";
 			$prescriptResult = mysqli_query($conn, $prescriptQuery);
 		?>
 		<h2 class="top-text">Choose a Prescription</h2>
 		<form method="post" action="pharmaceuticals.php">
 			<label for="prescriptQuery">Prescriptions:</label>
 			<select name="prescriptQuery">
-				<?php $row = mysqli_fetch_assoc($prescriptResult)) { ?>
-					<option value=<?php echo $row['PrescriptionID']; ?>
-					<?php $i++; } ?>
+				<?php while($row = mysqli_fetch_assoc($prescriptResult)) { ?>
+					<option value="<?php echo $row['PrescriptionName']; ?>">
+					<?php echo $row['PrescriptionName'].", $".$row['Cost']; ?></option>
+				<?php }; ?>
 			</select>
+			<div class="input-group">
+				<button type="submit" name="SSD0Choice">Submit Choice</button>
+			</div>
 
 		</form>
 	</div>
