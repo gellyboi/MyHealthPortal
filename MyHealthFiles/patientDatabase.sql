@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `PatientNotes`(
 	PatientID int,
 	DocID int,
 	Diagnoses varchar(255),
-	Recommendations varchar(127),
+	Recommendations varchar(255),
 	Prescriptions varchar(127),
 	FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
 	FOREIGN KEY (DocID) REFERENCES Doctors(DocID)
@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `PatientRecords`(
 --OutNetworkCoverage, and deductible (probably want to add PlanID as well)
 CREATE TABLE IF NOT EXISTS `Costs`(
 	PlanID int,
+	PrescriptionID int,
 	Treatment varchar(255),
 	AllowedCost float(9,2),
 	InNetworkCoverage float(9,2),
