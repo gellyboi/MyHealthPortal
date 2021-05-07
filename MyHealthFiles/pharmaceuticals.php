@@ -53,7 +53,10 @@
 		<form method="post" action="pharmaceuticals.php">
 			<label for="prescriptQuery">Prescriptions:</label>
 			<select name="prescriptQuery">
-		</select>
+				<?php $row = mysqli_fetch_assoc($prescriptResult)) { ?>
+					<option value=<?php echo $row['PrescriptionID']; ?>
+					<?php $i++; } ?>
+			</select>
 
 		</form>
 	</div>
